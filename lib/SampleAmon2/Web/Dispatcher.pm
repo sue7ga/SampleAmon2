@@ -28,9 +28,9 @@ post 'student/register' => sub{
 
 get 'student/list' => sub{
  my ($c) = @_;
- my @students = $c->db->get_students; 
- print Dumper @students;
- return $c->render('student_list.tx',{students => \@students});
+ my $students = $c->db->get_students; 
+ print Dumper $students;
+ return $c->render('student_list.tx',{students => $students});
 };
 
 get '/login' => sub{

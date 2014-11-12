@@ -2,7 +2,7 @@
 
 : override content -> {
   
-: while $students -> $student{
+: for $students -> $student{
 
  <: $student.email :>
 

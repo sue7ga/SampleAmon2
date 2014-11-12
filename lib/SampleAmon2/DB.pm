@@ -25,15 +25,13 @@ sub insert_student{
 sub get_students{
  my ($self) = @_;
 
- my ($row) = $self->search(
+ my @rows = $self->search(
     'students',
      {},
      {order_by => {'id' => 'DESC'},limit => 20}
  );
 
- my @students = $row->all;
-
- return @students;
+ return \@rows;
 }
 
 1;
