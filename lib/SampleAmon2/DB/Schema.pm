@@ -8,9 +8,9 @@ use Teng::Schema::Declare;
 base_row_class 'SampleAmon2::DB::Row';
 
 table {
-    name 'member';
+    name 'students';
     pk 'id';
-    columns qw(id name);
+    columns qw(id email password name school profile);
 };
 
 1;

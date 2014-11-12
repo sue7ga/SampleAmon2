@@ -15,14 +15,22 @@ any '/' => sub {
     });
 };
 
-get '/register' => sub{
+get 'student/register' => sub{
  my ($c) = @_;  
  return $c->render('register.tx');
 };
 
-post '/register' => sub{
+post 'student/register' => sub{
+ my ($c) = @_; 
+ $c->db->insert_student($c->req);
+ return $c->render('login.tx')
+};
+
+get 'student/list' => sub{
  my ($c) = @_;
- return $c->render('mypage.tx')
+ my @students = $c->db->get_students; 
+ print Dumper @students;
+ return $c->render('student_list.tx',{students => \@students});
 };
 
 get '/login' => sub{
@@ -33,7 +41,6 @@ get '/login' => sub{
 
 get '/mypage' => sub{
  my($c) = @_;
- print Dumper $c->session->get('user');
  if(!$c->session->get('user')){
    return $c->redirect('/login');
  }
@@ -57,5 +64,8 @@ post 'teacher/login' => sub{
   return $c->redirect('/login');
 };
 
-
 1;
+
+
+
+

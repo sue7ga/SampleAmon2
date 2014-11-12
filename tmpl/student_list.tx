@@ -1,0 +1,11 @@
+:cascade "include/layout.tx"
+
+: override content -> {
+  
+: while $students -> $student{
+
+ <: $student.email :>
+
+: }
+  
+:}
