@@ -2,10 +2,21 @@
 
 : override content -> {
   
+ <table>
+  <tr>
+   <th>email</th>
+   <th>name</th>
+   <th>school</th>
+   <th>profile</th>
+  </tr>
 : for $students -> $student{
-
- <: $student.email :>
-
+  <tr>
+   <td><: $student.email:></td>
+   <td><: $student.name:></td>
+   <td><: $student.school:></td>
+   <td><: $student.profile:></td>
+  </tr>
 : }
+ </table>
   
 :}

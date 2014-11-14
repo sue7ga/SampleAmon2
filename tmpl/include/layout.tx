@@ -31,9 +31,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="student/register">Register</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/mypage">MyPage</a></li>
+                    <li class="active"><a href="student/register">生徒登録</a></li>
+                    <li><a href="/teacher/register">教師登録</a></li>
+                    <li><a href="/login">生徒ログイン</a></li>
+                    <li><a href="/teacher/login">教師ログイン</a></li>
+                    <li><a href="/mypage">生徒マイページ</a></l>
+                    <li><a href="/teacher/mypage">教師マイページ</a></li>
+                    <li><a href="/student/list">生徒一覧</a></li>
+                    <li><a href="/teacher/list">教師一覧</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </ul>
             </div>

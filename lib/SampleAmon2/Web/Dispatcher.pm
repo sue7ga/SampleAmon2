@@ -20,16 +20,26 @@ get 'student/register' => sub{
  return $c->render('register.tx');
 };
 
+get 'teacher/register' => sub{
+ my($c) = @_;
+ return $c->render('teacher_register.tx');
+};
+
 post 'student/register' => sub{
  my ($c) = @_; 
  $c->db->insert_student($c->req);
  return $c->render('login.tx')
 };
 
+post 'teacher/register' => sub{
+ my ($c) = @_; 
+ $c->db->insert_teacher($c->req);
+  return $c->render('teacher_login.tx');
+};
+
 get 'student/list' => sub{
  my ($c) = @_;
  my $students = $c->db->get_students; 
- print Dumper $students;
  return $c->render('student_list.tx',{students => $students});
 };
 
@@ -63,6 +73,7 @@ post 'teacher/login' => sub{
   }
   return $c->redirect('/login');
 };
+
 
 1;
 
