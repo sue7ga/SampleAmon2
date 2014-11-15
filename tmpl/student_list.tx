@@ -17,7 +17,9 @@
    <td><: $student.name:></td>
    <td><: $student.school:></td>
    <td><: $student.profile:></td>
-   <td><button type="button" id="modal-open" class="btn btn-primary" val="<:$student.id:>">詳細を見る</button></td>
+   <td>
+<button type="button" class="btn btn-primary modal-open" value="<:$student.id:>">詳細を見る</button>
+</td>     
   </tr>
 
 : }
@@ -32,11 +34,13 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-  $("#modal-open").on("click",function(){
-    var studentid = $("#modal-open").val();
+  $(".js-modal-open").on("click",function(e){
+    var $el = $(e.target);
+    var studentid = $el.val();
     alert(studentid);
 
 	$("body").append('<div id="modal-overlay"></div>');
+        $("#modal-content p").html('<h1>studentid</h1>');
 	$("#modal-overlay").fadeIn("slow");
 
 	//コンテンツをセンタリングする
