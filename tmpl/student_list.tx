@@ -11,6 +11,7 @@
    <th>詳細</th>
   </tr>
 : for $students -> $student{
+
   <tr>
    <td><: $student.email:></td>
    <td><: $student.name:></td>
@@ -20,11 +21,12 @@
   </tr>
 
 : }
+
  </table>
 
-<div id="modal-content">
- <p>hogehoge</p>
- <p><a id="modal-close" class="button-link">閉じる</a></p>
+<div id="modal-content">	
+	<p></p>
+	hoge
 </div>
 
 <script type="text/javascript">
@@ -33,7 +35,49 @@ $(document).ready(function(){
   $("#modal-open").on("click",function(){
     var studentid = $("#modal-open").val();
     alert(studentid);
+
+	$("body").append('<div id="modal-overlay"></div>');
+	$("#modal-overlay").fadeIn("slow");
+
+	//コンテンツをセンタリングする
+	centeringModalSyncer();
+
+	//コンテンツをフェードインする
+	$("#modal-content").fadeIn("slow");
+
+	//[#modal-overlay]、または[#modal-close]をクリックしたら…
+	$("#modal-overlay,#modal-close").unbind().click(function(){
+
+		//[#modal-content]と[#modal-overlay]をフェードアウトした後に…
+		$("#modal-content,#modal-overlay").fadeOut("slow",function(){
+
+			//[#modal-overlay]を削除する
+			$('#modal-overlay').remove();
+
+		});
+
+	});
+
    });
+
+$(window).resize(centeringModalSyncer);
+
+//センタリングを実行する関数
+function centeringModalSyncer(){
+
+	//画面(ウィンドウ)の幅、高さを取得
+	var w = $(window).width();
+	var h = $(window).height();
+
+	//コンテンツ(#modal-content)の幅、高さを取得
+	var cw = $("#modal-content").outerWidth({margin:true});
+	var ch = $("#modal-content").outerHeight({margin:true});
+
+	//センタリングを実行する
+	$("#modal-content").css({"left": 200 + "px","top": 200 + "px"})
+
+}
+
 });
 
 </script>
