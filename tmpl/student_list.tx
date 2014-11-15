@@ -8,6 +8,7 @@
    <th>name</th>
    <th>school</th>
    <th>profile</th>
+   <th>詳細</th>
   </tr>
 : for $students -> $student{
   <tr>
@@ -15,8 +16,27 @@
    <td><: $student.name:></td>
    <td><: $student.school:></td>
    <td><: $student.profile:></td>
+   <td><button type="button" id="modal-open" class="btn btn-primary" val="<:$student.id:>">詳細を見る</button></td>
   </tr>
+
 : }
  </table>
-  
+
+<div id="modal-content">
+ <p>hogehoge</p>
+ <p><a id="modal-close" class="button-link">閉じる</a></p>
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  $("#modal-open").on("click",function(){
+    var studentid = $("#modal-open").val();
+    alert(studentid);
+   });
+});
+
+</script>
+
+
 :}

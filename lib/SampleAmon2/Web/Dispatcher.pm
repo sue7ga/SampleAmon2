@@ -49,6 +49,13 @@ get '/login' => sub{
   return $c->render('login.tx');
 };
 
+get 'teacher/login' => sub{
+  my($c) = @_;
+  my $user = $c->session->get('user') || 0;
+  return $c->render('teacher_login.tx');
+};
+
+
 get '/mypage' => sub{
  my($c) = @_;
  if(!$c->session->get('user')){
@@ -63,7 +70,7 @@ get '/logout' => sub{
  return $c->redirect('/login');
 };
 
-post 'teacher/login' => sub{
+post 'student/login' => sub{
   my ($c) = shift;
   my $email = $c->req->{'amon2.body_parameters'}->{email};
   my $password = $c->req->{'amon2.body_parameters'}->{password};
@@ -74,6 +81,16 @@ post 'teacher/login' => sub{
   return $c->redirect('/login');
 };
 
+post 'teachr/login' =>sub{
+ my($c) = shift;
+  my $email = $c->req->{'amon2.body_parameters'}->{email};
+  my $password = $c->req->{'amon2.body_parameters'}->{password};
+  if($email eq 'test' && $password eq 'test'){
+    $c->session->set('user' => 1);
+    return $c->redirect('teacher/mypage');
+  }
+  return $c->redirect('teacher/login');
+};
 
 1;
 
