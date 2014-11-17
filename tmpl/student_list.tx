@@ -23,28 +23,38 @@
   </tr>
 
 : }
-
- </table>
+</table>
 
 <div id="modal-content">	
-	<p></p>
-	hoge
+	<p></p>	
 </div>
 
 <script type="text/javascript">
 
 $(document).ready(function(){
-  $(".js-modal-open").on("click",function(e){
-    var $el = $(e.target);
-    var studentid = $el.val();
-    alert(studentid);
+  $(".modal-open").on("click",function(e){
+     var $el = $(e.target);
+     var studentid = $el.val();	
 
-	$("body").append('<div id="modal-overlay"></div>');
-        $("#modal-content p").html('<h1>studentid</h1>');
-	$("#modal-overlay").fadeIn("slow");
+     $("body").append('<div id="modal-overlay"></div>'); 
+     $("#modal-overlay").fadeIn("slow");
 
-	//コンテンツをセンタリングする
-	centeringModalSyncer();
+   $.ajax({
+     type: 'GET',
+     url: '/js/modal',
+     datatype: 'json',
+     data: {
+      studentid:studentid
+     },
+     success: function(data){
+        $("#modal-content p").html(data.studentinfo);
+     },
+     error: function(){
+      alert('error');
+     }
+   });
+
+        centeringModalSyncer();
 
 	//コンテンツをフェードインする
 	$("#modal-content").fadeIn("slow");
@@ -62,12 +72,14 @@ $(document).ready(function(){
 
 	});
 
-   });
+      
+ });
+	//コンテンツをセンタリングする
 
-$(window).resize(centeringModalSyncer);
+        $(window).resize(centeringModalSyncer);
 
 //センタリングを実行する関数
-function centeringModalSyncer(){
+     function centeringModalSyncer(){
 
 	//画面(ウィンドウ)の幅、高さを取得
 	var w = $(window).width();
@@ -78,9 +90,8 @@ function centeringModalSyncer(){
 	var ch = $("#modal-content").outerHeight({margin:true});
 
 	//センタリングを実行する
-	$("#modal-content").css({"left": 200 + "px","top": 200 + "px"})
-
-}
+	$("#modal-content").css({"left": 300 + "px","top": 200 + "px"})
+     }
 
 });
 

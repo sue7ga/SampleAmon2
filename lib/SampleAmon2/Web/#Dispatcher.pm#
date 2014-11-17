@@ -34,7 +34,7 @@ post 'student/register' => sub{
 post 'teacher/register' => sub{
  my ($c) = @_; 
  print Dumper $c;
- #$c->db->insert_teacher($c->req);
+ #l$c->db->insert_teacher($c->req);
   return $c->render('teacher_login.tx');
 };
 

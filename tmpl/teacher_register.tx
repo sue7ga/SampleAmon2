@@ -28,4 +28,23 @@
 <p><input type="submit" value="送信"></p>
 </form>
 
+<script type="text/javascript">
+
+$(document).ready(function(){
+  
+  $("form").submit(function(){     
+     $("input[type='text'].validate,textarea.validate").each(function(){
+         if($(this).hasClass("required")){
+            if($(this).val()==""){
+               alert('hoge');
+               $(this).parent().prepend("<p class='error'>必須項目です</p>");
+            }
+         }
+     });
+  });    
+
+});
+
+</script>
+
 : }

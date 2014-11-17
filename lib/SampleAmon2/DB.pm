@@ -39,7 +39,7 @@ my($self,$param) = @_;
  my $profile = $param->{'amon2.body_parameters'}->{profile};
 
  my $dt = DateTime->now();
- $self->insert('teachers',{email => $email,password=>$password,name => $name,school => $school,age => $age,prefecture=> $prefecture,income => $income,day => $day,teaching => $teaching,profile => $profile,created_at => $dt,updated_at => $dt});
+ $self->insert('teachers',{mail => $email,password=>$password,name => $name,school => $school,age => $age,prefecture=> $prefecture,income => $income,day => $day,teaching => $teaching,profile => $profile,created_at => $dt,updated_at => $dt});
 
 }
 
@@ -53,6 +53,15 @@ sub get_students{
  );
 
  return \@rows;
+}
+
+sub search_by_studentid{
+ my ($self,$studentid) = @_;
+ my $itr = $self->search(
+   students => {id => [$studentid]}
+ );
+ return $itr;
+
 }
 
 1;

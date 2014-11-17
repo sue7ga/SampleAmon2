@@ -105,3 +105,10 @@ th,td{
 	height:120%;
 	background-color:rgba(0,0,0,0.75);
 }
+
+dl dd p.error{
+  margin:0;
+  color:red;
+  font-weigth:bold;
+  margin-bottom:1em;
+}
