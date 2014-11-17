@@ -1,0 +1,101 @@
+:cascade "include/layout.tx"
+
+: override content -> {
+  
+ <table>
+  <tr>
+   <th>email</th>
+   <th>name</th>
+   <th>school</th>
+   <th>profile</th>
+   <th>詳細</th>
+  </tr>
+: for $teachers -> $teacher{
+
+  <tr>
+   <td><: $teacher.email:></td>
+   <td><: $teacher.name:></td>
+   <td><: $teacher.school:></td>
+   <td><: $teacher.profile:></td>
+   <td>
+<button type="button" class="btn btn-primary modal-open" value="<:$teacher.id:>">詳細を見る</button>
+</td>     
+  </tr>
+
+: }
+</table>
+
+<div id="modal-content">	
+	<p></p>	
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  $(".modal-open").on("click",function(e){
+     var $el = $(e.target);
+     var studentid = $el.val();	
+
+     $("body").append('<div id="modal-overlay"></div>'); 
+     $("#modal-overlay").fadeIn("slow");
+
+   $.ajax({
+     type: 'GET',
+     url: '/js/modal/teacher',
+     datatype: 'json',
+     data: {
+      studentid:studentid
+     },
+     success: function(data){
+        $("#modal-content p").html(data.studentinfo);
+     },
+     error: function(){
+      alert('error');
+     }
+   });
+
+        centeringModalSyncer();
+
+	//コンテンツをフェードインする
+	$("#modal-content").fadeIn("slow");
+
+	//[#modal-overlay]、または[#modal-close]をクリックしたら…
+	$("#modal-overlay,#modal-close").unbind().click(function(){
+
+		//[#modal-content]と[#modal-overlay]をフェードアウトした後に…
+		$("#modal-content,#modal-overlay").fadeOut("slow",function(){
+
+			//[#modal-overlay]を削除する
+			$('#modal-overlay').remove();
+
+		});
+
+	});
+
+      
+ });
+	//コンテンツをセンタリングする
+
+        $(window).resize(centeringModalSyncer);
+
+//センタリングを実行する関数
+     function centeringModalSyncer(){
+
+	//画面(ウィンドウ)の幅、高さを取得
+	var w = $(window).width();
+	var h = $(window).height();
+
+	//コンテンツ(#modal-content)の幅、高さを取得
+	var cw = $("#modal-content").outerWidth({margin:true});
+	var ch = $("#modal-content").outerHeight({margin:true});
+
+	//センタリングを実行する
+	$("#modal-content").css({"left": 300 + "px","top": 200 + "px"})
+     }
+
+});
+
+</script>
+
+
+:}

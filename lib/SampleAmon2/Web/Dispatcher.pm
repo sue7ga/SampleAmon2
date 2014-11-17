@@ -32,16 +32,21 @@ post 'student/register' => sub{
 };
 
 post 'teacher/register' => sub{
- my ($c) = @_; 
- print Dumper $c;
- #$c->db->insert_teacher($c->req);
-  return $c->render('teacher_login.tx');
+ my ($c) = @_;
+ $c->db->insert_teacher($c->req);
+ return $c->render('teacher_login.tx');
 };
 
 get 'student/list' => sub{
  my ($c) = @_;
  my $students = $c->db->get_students; 
  return $c->render('student_list.tx',{students => $students});
+};
+
+get 'teacher/list' => sub{
+ my ($c) = @_;
+ my $teachers = $c->db->get_teachers; 
+ return $c->render('teacher_list.tx',{teachers => $teachers});
 };
 
 get '/login' => sub{

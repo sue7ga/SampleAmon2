@@ -32,13 +32,14 @@
 
 $(document).ready(function(){
   
-  $("form").submit(function(){     
+  $("form").submit(function(event){     
      $("input[type='text'].validate,textarea.validate").each(function(){
          if($(this).hasClass("required")){
             if($(this).val()==""){
                alert('hoge');
                $(this).parent().prepend("<p class='error'>必須項目です</p>");
             }
+            event.preventDefault();
          }
      });
   });    

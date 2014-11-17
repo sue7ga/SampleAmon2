@@ -9,7 +9,12 @@
 <dt>password</dt>
 <dd><input type="text" name="password" size="80"></dd>
 </dl>
-<p><input type="submit" value="送信"></p>
+<p><input type="submit" value="Login"></p>
 </form>
+
+<br/>
   
+<a href="/student/register"><button type="button" class="btn btn-default">生徒登録をする</button></a>
+
+
 :}
