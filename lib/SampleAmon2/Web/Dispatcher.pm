@@ -114,8 +114,9 @@ get '/logout' => sub{
 post 'student/login' => sub{
   my ($c) = shift;
   my $email = $c->req->{'amon2.body_parameters'}->{email};
-  my $password = $c->req->{'amon2.body_parameters'}->{password};
-  if($email eq 'test' && $password eq 'test'){
+  my $password = $c->req->{'amon2.body_parameters'}->{password};  
+  my $student = $c->db->get_student_mail_and_pass($email);
+  if($password eq $student->password){
     $c->session->set('user' => 1);
     return $c->redirect('/mypage');
   }
@@ -123,15 +124,18 @@ post 'student/login' => sub{
 };
 
 post 'teachr/login' =>sub{
- my($c) = shift;
+  my($c) = shift;
   my $email = $c->req->{'amon2.body_parameters'}->{email};
   my $password = $c->req->{'amon2.body_parameters'}->{password};
-  if($email eq 'test' && $password eq 'test'){
+  my $teacher = $c->db->get_teacher_mail_and_pass($email);
+  if($password eq $teacher->password){
+    print Dumper "hoge";
     $c->session->set('user' => 1);
     return $c->redirect('teacher/mypage');
   }
   return $c->redirect('teacher/login');
 };
+
 
 1;
 

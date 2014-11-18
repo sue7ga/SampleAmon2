@@ -84,5 +84,22 @@ sub search_by_teacherid{
 
 }
 
+sub get_student_mail_and_pass{
+ my ($self,$email) = @_;
+ my $itr = $self->single(
+   "students",{email => $email}
+ );
+ return $itr;
+}
+
+sub get_teacher_mail_and_pass{
+ my ($self,$email) = @_;
+ my $itr = $self->single(
+   "teachers",{email => $email}
+ );
+ return $itr;
+}
+
+
 
 1;
