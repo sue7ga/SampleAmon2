@@ -26,7 +26,7 @@
  </dd>
  <dt>都道府県</dt>
  <dd>
-   <select name="pref">
+   <select name="prefecture">
    : for $prefs -> $pref{
      <option value="<:$pref:>"><: $pref :></option>
    : }

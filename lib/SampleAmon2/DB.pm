@@ -25,18 +25,20 @@ sub insert_student{
 sub insert_teacher{
 my($self,$param) = @_;
  
- my @columns = ('email','password','name','school','age','prefecture','income','day','teaching','profile');
-
- my $email = $param->{'amon2.body_parameters'}->{email};
- my $password = $param->{'amon2.body_parameters'}->{password};
- my $name = $param->{'amon2.body_parameters'}->{name};
- my $school = $param->{'amon2.body_parameters'}->{school};
- my $age = $param->{'amon2.body_parameters'}->{age};
- my $prefecture = $param->{'amon2.body_parameters'}->{prefecture};
- my $income = $param->{'amon2.body_parameters'}->{income};
- my $day = $param->{'amon2.body_parameters'}->{day};
- my $teaching = $param->{'amon2.body_parameters'}->{teaching};
- my $profile = $param->{'amon2.body_parameters'}->{profile};
+  my @columns = ('email','password','name','school','age','prefecture','income','day','teaching','profile','gender');
+ 
+  my $email = $param->{'amon2.body_parameters'}->{email};
+  my $password = $param->{'amon2.body_parameters'}->{password};
+  my $name = $param->{'amon2.body_parameters'}->{name};
+  my $school = $param->{'amon2.body_parameters'}->{school};
+  my $age = $param->{'amon2.body_parameters'}->{age};
+  my $prefecture = $param->{'amon2.body_parameters'}->{prefecture};
+  my $income = $param->{'amon2.body_parameters'}->{income};
+  my $day = $param->{'amon2.body_parameters'}->{day};
+  my $teaching = $param->{'amon2.body_parameters'}->{teaching};
+  my $profile = $param->{'amon2.body_parameters'}->{profile};
+  my $gender = $param->{'amon2.body_parameters'}->{gender};
+ 
 
  my $dt = DateTime->now();
  $self->insert('teachers',{email => $email,password=>$password,name => $name,school => $school,age => $age,prefecture=> $prefecture,income => $income,day => $day,teaching => $teaching,profile => $profile,created_at => $dt,updated_at => $dt});

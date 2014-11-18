@@ -28,14 +28,13 @@ get 'teacher/register' => sub{
 };
 
 post 'student/register' => sub{
- my ($c) = @_; 
+ my ($c) = @_;
  $c->db->insert_student($c->req);
  return $c->render('login.tx')
 };
 
 post 'teacher/register' => sub{
  my ($c) = @_;
- print Dumper $c->req;
  $c->db->insert_teacher($c->req);
  return $c->render('teacher_login.tx');
 };
@@ -129,11 +128,18 @@ post 'teacher/login' =>sub{
   my $password = $c->req->{'amon2.body_parameters'}->{password};
   my $teacher = $c->db->get_teacher_mail_and_pass($email);
   if($password eq $teacher->password){
-    print Dumper "hoge";
     $c->session->set('teacheruser' => 1);
-    return $c->redirect('teacher/login');
+    return $c->redirect('/teacher/mypage');
   }
-  return $c->redirect('teacher/login');
+  return $c->redirect('/teacher/login');
+};
+
+get '/teacher/mypage' => sub{
+ my($c) = @_;
+ if(!$c->session->get('teacheruser')){
+   return $c->redirect('/teacher/login');
+ }
+ return $c->render('teacher_mypage.tx');
 };
 
 
