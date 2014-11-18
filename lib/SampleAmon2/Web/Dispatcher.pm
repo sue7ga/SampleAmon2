@@ -92,7 +92,7 @@ get '/js/modal/teacher' => sub{
 
 get 'teacher/login' => sub{
   my($c) = @_;
-  my $user = $c->session->get('user') || 0;
+  my $user = $c->session->get('teacheruser') || 0;
   return $c->render('teacher_login.tx');
 };
 
@@ -123,15 +123,15 @@ post 'student/login' => sub{
   return $c->redirect('/login');
 };
 
-post 'teachr/login' =>sub{
+post 'teacher/login' =>sub{
   my($c) = shift;
   my $email = $c->req->{'amon2.body_parameters'}->{email};
   my $password = $c->req->{'amon2.body_parameters'}->{password};
   my $teacher = $c->db->get_teacher_mail_and_pass($email);
   if($password eq $teacher->password){
     print Dumper "hoge";
-    $c->session->set('user' => 1);
-    return $c->redirect('teacher/mypage');
+    $c->session->set('teacheruser' => 1);
+    return $c->redirect('teacher/login');
   }
   return $c->redirect('teacher/login');
 };
