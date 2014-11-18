@@ -75,4 +75,14 @@ sub search_by_studentid{
 
 }
 
+sub search_by_teacherid{
+ my ($self,$teacherid) = @_;
+ my $itr = $self->search(
+   teachers => {id => [$teacherid]}
+ );
+ return $itr;
+
+}
+
+
 1;

@@ -34,7 +34,7 @@
 $(document).ready(function(){
   $(".modal-open").on("click",function(e){
      var $el = $(e.target);
-     var studentid = $el.val();	
+     var teacherid = $el.val();	
 
      $("body").append('<div id="modal-overlay"></div>'); 
      $("#modal-overlay").fadeIn("slow");
@@ -44,10 +44,10 @@ $(document).ready(function(){
      url: '/js/modal/teacher',
      datatype: 'json',
      data: {
-      studentid:studentid
+      teacherid:teacherid
      },
      success: function(data){
-        $("#modal-content p").html(data.studentinfo);
+        $("#modal-content p").html(data.teacherinfo);
      },
      error: function(){
       alert('error');
