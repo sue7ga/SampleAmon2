@@ -2,7 +2,7 @@
 
 : override content -> {
   
-   <form class="well form-search" method="post" action="<: uri_for('teachers/search'):>">
+ <form class="well form-search" method="post" action="<: uri_for('teachers/search'):>">
 都道府県：
    <select name="pref_name">
 <option value="" selected>都道府県

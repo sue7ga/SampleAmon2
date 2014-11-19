@@ -7,6 +7,9 @@
    <th>email</th>
    <th>name</th>
    <th>school</th>
+   <th>age</th>
+   <th>gender</th>
+   <th>prefecture</th>
    <th>profile</th>
    <th>詳細</th>
   </tr>
@@ -16,6 +19,9 @@
    <td><: $teacher.email:></td>
    <td><: $teacher.name:></td>
    <td><: $teacher.school:></td>
+   <td><: $teacher.age:></td>
+   <td><: $teacher.gender:></td>
+   <td><: $teacher.prefecture:></td>
    <td><: $teacher.profile:></td>
    <td>
 <button type="button" class="btn btn-primary modal-open" value="<:$teacher.id:>">詳細を見る</button>

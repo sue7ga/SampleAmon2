@@ -46,7 +46,7 @@ my($self,$param) = @_;
   my $profile = $param->{'amon2.body_parameters'}->{profile};
   my $gender = $param->{'amon2.body_parameters'}->{gender};
 
- $self->insert('teachers',{email => $email,password=>$password,name => $name,school => $school,age => $age,prefecture=> $prefecture,income => $income,day => $day,teaching => $teaching,profile => $profile});
+ $self->insert('teachers',{email => $email,password=>$password,name => $name,school => $school,age => $age,prefecture=> $prefecture,income => $income,day => $day,teaching => $teaching,profile => $profile,gender => $gender});
 
 }
 
@@ -107,11 +107,17 @@ sub get_teacher_mail_and_pass{
  return $itr;
 }
 
+use Encode;
+
 sub search_teacher{
  my($self,$args) = @_;
  my $school = $args->get('school');
+ my $prefecture = $args->get('pref_name');
+ my $age = $args->get('age');
 
- my @rows = $self->search_by_sql('SELECT * FROM teachers WHERE school = "?"',$school);
+ print Dumper $age;
+
+ my @rows = $self->search_by_sql('SELECT * FROM teachers WHERE school = ? OR prefecture = ? OR age = ? ',[$school],[$prefecture],[$age]);
 
  return \@rows;
 }
