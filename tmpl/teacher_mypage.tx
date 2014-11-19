@@ -3,8 +3,8 @@
 : override content -> {
   
     <form class="well form-search">
-    <input type="text" class="input-medium search-query">
-    <button type="submit" class="btn btn-success"> 検 索 </button>
-    </form>
-  
+     <input type="text" class="input-medium search-query">
+     <button type="submit" class="btn btn-success"> 検 索 </button>
+    </form>   
+
 :}

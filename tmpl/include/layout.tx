@@ -35,8 +35,7 @@
                     <li><a href="/teacher/register">教師登録</a></li>
                     <li><a href="/login">生徒ログイン</a></li>
                     <li><a href="/teacher/login">教師ログイン</a></li>
-                    <li><a href="/mypage">生徒マイページ</a></l>
-                    <li><a href="/teacher/mypage">教師マイページ</a></li>
+                    <li><a href="/teachers/search">教師検索</a></li>
                     <li><a href="/student/list">生徒一覧</a></li>
                     <li><a href="/teacher/list">教師一覧</a></li>
                     <li><a href="/logout">Logout</a></li>

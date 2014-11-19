@@ -17,7 +17,7 @@
  <dt>パスワード(確認)</dt>
  <dd><input type="password" name="password_check" size="80" class="validate password password_check"></dd>
  <dt>自己紹介</dt>
- <dd><input type="text" name="profile" size="80"></dd>
+ <dd><textarea name="profile" size="80"></textarea></dd>
  <dt>年齢</dt>
  <dd><input type="text" name="age" size="80" class="validate number"></dd>
  <dt>性別<span>※</span></dt>
@@ -27,12 +27,14 @@
  </dd>
  <dt>都道府県</dt>
  <dd>
-   <select name="pref">
+   <select name="prefecture">
    : for $prefs -> $pref{
      <option value="<:$pref:>"><: $pref :></option>
    : }
    </select>
  </dd>
+ <dt>指導可能時間・曜日</fdt>
+ <dd><textarea name="day" size="80"></textarea></dd>
  </dl>
 <p><input type="submit" value="送信"></p>
 </form>
@@ -111,3 +113,5 @@
 </script>
 
 : }
+
+

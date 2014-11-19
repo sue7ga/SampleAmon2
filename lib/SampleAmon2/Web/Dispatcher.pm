@@ -27,6 +27,18 @@ get 'teacher/register' => sub{
  return $c->render('teacher_register.tx',{prefs => \@prefs});
 };
 
+get 'teachers/search' => sub{
+ my($c) = @_;
+ return $c->render('teachers_search.tx');
+};
+
+post 'teachers/search' => sub{
+ my($c) = @_;
+ print Dumper $c->req->parameters;
+ my $teachers =  $c->db->search_teacher($c->req->parameters);
+ return $c->render('teachers_search.tx');
+};
+
 post 'student/register' => sub{
  my ($c) = @_;
  $c->db->insert_student($c->req);
@@ -141,7 +153,6 @@ get '/teacher/mypage' => sub{
  }
  return $c->render('teacher_mypage.tx');
 };
-
 
 1;
 
