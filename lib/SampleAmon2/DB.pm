@@ -6,6 +6,8 @@ use parent qw(Teng);
 use DateTime;
 use Data::Dumper;
 
+use DBI;
+
 __PACKAGE__->load_plugin('Count');
 __PACKAGE__->load_plugin('Replace');
 __PACKAGE__->load_plugin('Pager');
@@ -107,10 +109,11 @@ sub get_teacher_mail_and_pass{
 
 sub search_teacher{
  my($self,$args) = @_;
+ my $school = $args->get('school');
 
- print Dumper $args;
- 
- return $args;
+ my @rows = $self->search_by_sql('SELECT * FROM teachers WHERE school = "?"',$school);
+
+ return \@rows;
 }
 
 1;

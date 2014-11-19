@@ -25,7 +25,7 @@ table {
 table{
    name 'teachers';
    pk 'id';
-   columns qw(id email password name school age prefecture income day teaching profile created_at updated_at);
+   columns qw(id email password name school gender age prefecture income day teaching profile created_at updated_at);
   inflate qr/.+_at/ => sub{
     my($col_value) = @_;
     DateTime->from_epoch($col_value);

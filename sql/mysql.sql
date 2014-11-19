@@ -1,4 +1,4 @@
-CREATE TABLE students(
+CREATE TABLE IF NOT EXISTS students(
   id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
   email VARCHAR(255),
   password VARCHAR(255),
@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS teachers(
   day VARCHAR(255),
   teaching VARCHAR(255),
   profile  TEXT,
+  gender VARCHAR(255),
   created_at TIMESTAMP,
   updated_at TIMESTAMP
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
