@@ -13,41 +13,14 @@ __PACKAGE__->load_plugin('Replace');
 __PACKAGE__->load_plugin('Pager');
 
 sub insert_student{
- my($self,$param) = @_;
- 
-  my $email = $param->{'amon2.body_parameters'}->{email};
-  my $password = $param->{'amon2.body_parameters'}->{password};
-  my $name = $param->{'amon2.body_parameters'}->{name};
-  my $school = $param->{'amon2.body_parameters'}->{school};
-  my $age = $param->{'amon2.body_parameters'}->{age};
-  my $prefecture = $param->{'amon2.body_parameters'}->{prefecture};
-  my $day = $param->{'amon2.body_parameters'}->{day};
-  my $profile = $param->{'amon2.body_parameters'}->{profile}; 
-  my $gender = $param->{'amon2.body_parameters'}->{gender};
-
- $self->insert('students',{email => $email,password=>$password,name => $name,school => $school,age => $age,prefecture => $prefecture,day => $day,profile => $profile,gender => $gender});
-
+ my($self,$args) = @_;
+ $self->insert('students',{email => $args->{email},password=>$args->{password},name => $args->{name},school => $args->{school},age => $args->{age},prefecture => $args->{prefecture},day => $args->{day},profile => $args->{profile},gender => $args->{gender}});
 }
 
 sub insert_teacher{
-my($self,$param) = @_;
+  my($self,$args) = @_;
  
-  my @columns = ('email','password','name','school','age','prefecture','income','day','teaching','profile','gender');
- 
-  my $email = $param->{'amon2.body_parameters'}->{email};
-  my $password = $param->{'amon2.body_parameters'}->{password};
-  my $name = $param->{'amon2.body_parameters'}->{name};
-  my $school = $param->{'amon2.body_parameters'}->{school};
-  my $age = $param->{'amon2.body_parameters'}->{age};
-  my $prefecture = $param->{'amon2.body_parameters'}->{prefecture};
-  my $income = $param->{'amon2.body_parameters'}->{income};
-  my $day = $param->{'amon2.body_parameters'}->{day};
-  my $teaching = $param->{'amon2.body_parameters'}->{teaching};
-  my $profile = $param->{'amon2.body_parameters'}->{profile};
-  my $gender = $param->{'amon2.body_parameters'}->{gender};
-
- $self->insert('teachers',{email => $email,password=>$password,name => $name,school => $school,age => $age,prefecture=> $prefecture,income => $income,day => $day,teaching => $teaching,profile => $profile,gender => $gender});
-
+ $self->insert('teachers',{email => $args->{email},password=>$args->{password},name => $args->{name},school => $args->{school},age => $args->{age},prefecture=> $args->{prefecture},income => $args->{income},day => $args->{day},teaching => $args->{teaching},profile => $args->{profile},gender => $args->{gender}});
 }
 
 sub get_students{
@@ -70,6 +43,7 @@ sub get_teachers{
                           {},
                           {order_by => {'id' => 'DESC'},limit=> 20}
  );
+
  return \@rows;
 }
 
@@ -88,7 +62,6 @@ sub search_by_teacherid{
    teachers => {id => [$teacherid]}
  );
  return $itr;
-
 }
 
 sub get_student_mail_and_pass{
@@ -114,6 +87,7 @@ sub search_teacher{
  my $school = $args->get('school');
  my $prefecture = $args->get('pref_name');
  my $age = $args->get('age');
+
 
  print Dumper $age;
 
