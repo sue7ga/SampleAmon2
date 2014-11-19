@@ -117,7 +117,7 @@ sub search_teacher{
 
  print Dumper $age;
 
- my @rows = $self->search_by_sql('SELECT * FROM teachers WHERE school = ? OR prefecture = ? OR age = ? ',[$school],[$prefecture],[$age]);
+ my @rows = $self->search_named('SELECT * FROM teachers WHERE school = :school OR prefecture = :prefecture OR age = :age ',+{school => $school,prefecture => $prefecture,age => $age});
 
  return \@rows;
 }
