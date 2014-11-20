@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="jp" ng-app>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title><: $title || 'SampleAmon2' :></title>
@@ -19,6 +19,8 @@
     <script src="<: uri_for('/static/js/xsrf-token.js') :>"></script>
     <link href="<: static_file('/static/css/main.css') :>" rel="stylesheet" type="text/css" media="screen" />
     <script src="<: static_file('/static/js/main.js') :>"></script>
+    <script src="<: static_file('/static/js/people.js') :>"></script>
+    <script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
     <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -31,12 +33,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/student/register">生徒登録</a></li>
-                    <li><a href="/teacher/register">教師登録</a></li>
-                    <li><a href="/student/login">生徒ログイン</a></li>
-                    <li><a href="/teacher/login">教師ログイン</a></li>
-                    <li><a href="/teachers/search">教師検索</a></li>
-                    <li><a href="/teacher/list">教師一覧</a></li>
+                    <li><a href="/teacher/student/list">生徒一覧</a></li>
+                    <li><a href="/student/list">生徒一覧</a></li>
+                    <li><a href="/teacher/mesagge">message</a></li>
+                    <li><a href="/teacher/setting">設定</a></li>
+                    <li><a href="/teacher/logout">Logout</a></li>
                 </ul>
             </div>
         </div><!-- /.container -->

@@ -1,7 +1,9 @@
 :cascade "include/layout.tx"
 
 : override content -> {
-  
+
+<a href="/teacher/mypage">教師マイページ</a>  
+ 
  <table>
   <tr>
    <th>email</th>
@@ -21,7 +23,8 @@
 <button type="button" class="btn btn-primary modal-open" value="<:$student.id:>">詳細を見る</button>
 </td>     
   </tr>
-
+ 
+ 
 : }
 </table>
 
@@ -96,6 +99,8 @@ $(document).ready(function(){
 });
 
 </script>
+
+ 
 
 
 :}

@@ -1,0 +1,13 @@
+:cascade "include/mypage.tx"
+
+: override content -> {
+
+     <div ng-controller="MainCtrl">
+       <input type="search" plackholder="Search" ng-model="search">:
+       <ul ng-repeat="person in people | filter:search">
+         <li>{{person.firstName}} {{person.lastName}}</li>
+       </ul>
+     </div>
+   
+
+:}

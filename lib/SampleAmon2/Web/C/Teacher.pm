@@ -10,6 +10,18 @@ use SampleAmon2::Model::Pref;
 my $pref = new SampleAmon2::Model::Pref();
 my @prefs = $pref->show();
 
+sub login_required{
+ my($self,$session) = @_;
+  $session->set('teacher' => 1);
+}
+
+sub required_login{
+ my($self,$session) = @_;
+ unless($session->get('teacher')){
+   return 1;
+ }
+}
+
 sub register{
  my($class,$c) = @_;
  return $c->render('teacher_register.tx',{prefs => \@prefs});
@@ -40,20 +52,29 @@ sub list{
 
 sub login{
  my($class,$c) = @_;
- my $user = $c->session->get('teacheruser') || 0;
-  return $c->render('teacher_login.tx');
+ return $c->render('teacher_login.tx');
 }
 
 sub mypage{
  my($class,$c) = @_;
- return $c->render('teacher_mypage.tx');
+ print Dumper $c->session->get('teacher');
+ if($c->session->get('teacher')){
+   return $c->render('teacher_mypage.tx');
+ }else{
+  return $c->render('teacher_login.tx');
+ }
 };
 
 sub logout{
  my ($class,$c) = @_;
  $c->session->set('teacher' => 0);
- return $c->redirect('/login');
+ return $c->redirect('/teacher/login');
 };
+
+sub showstudent{
+ my($class,$c) = @_; 
+ return $c->render('teacher_student_list.tx');
+}
 
 sub postlogin{
   my($class,$c) = @_;
@@ -64,7 +85,7 @@ sub postlogin{
     return $c->redirect('/teacher/login');
   }
   if($password eq $teacher->password){
-    $c->session->set('teacheruser' => 1);
+    $class->login_required($c->session);
     return $c->redirect('/teacher/mypage');
   }
 }

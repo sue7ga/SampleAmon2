@@ -1,0 +1,19 @@
+:cascade "include/layout.tx"
+
+: override content -> {
+  
+<form method="post" action="<: uri_for('teacher/login') :>">
+<dl>
+<dt>email</dt>
+<dd><input type="text" name="email" size="80" class="validate required"></dd>
+<dt>password</dt>
+<dd><input type="password" name="password" size="80"></dd>
+</dl>
+<p><input type="submit" value="Login"></p>
+</form>
+
+<br/>
+
+<a href="/teacher/register"><button type="button" class="btn btn-default">教師登録をする</button></a>
+  
+:}

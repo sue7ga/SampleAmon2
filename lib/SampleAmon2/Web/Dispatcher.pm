@@ -34,7 +34,9 @@ post 'student/register' => "Student#postregister";
 
 get 'student/list' => "Student#list";
 
-post 'student/login' => "Studet#postlogin";
+get 'student/login' => "Student#login";
+
+post 'student/login' => "Student#postlogin";
 
 get 'student/mypage' => "Student#mypage";
 
@@ -62,12 +64,13 @@ get 'teacher/list' => "Teacher#list";
 
 get 'teacher/login' => "Teacher#login";
 
+get 'teacher/student/list' => "Teacher#showstudent";
 #js
 
 use SampleAmon2::Model::Person;
 my $person = new SampleAmon2::Model::Person();
 
-get '/js/modal' => sub{bbbbbbb
+get '/js/modal' => sub{
  my($c,$args) = @_;
  my $studentid =  $c->req->param('studentid'); 
  my $student = $c->db->search_by_studentid($studentid);
