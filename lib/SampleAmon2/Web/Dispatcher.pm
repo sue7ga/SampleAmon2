@@ -27,6 +27,7 @@ my $pref = new SampleAmon2::Model::Pref();
 my @prefs = $pref->show();
 
 #student
+
 get 'student/register' => "Student#register";
 
 post 'student/register' => "Student#postregister";
@@ -66,7 +67,7 @@ get 'teacher/login' => "Teacher#login";
 use SampleAmon2::Model::Person;
 my $person = new SampleAmon2::Model::Person();
 
-get '/js/modal' => sub{
+get '/js/modal' => sub{bbbbbbb
  my($c,$args) = @_;
  my $studentid =  $c->req->param('studentid'); 
  my $student = $c->db->search_by_studentid($studentid);

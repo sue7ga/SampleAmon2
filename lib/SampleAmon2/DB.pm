@@ -84,13 +84,9 @@ use Encode;
 
 sub search_teacher{
  my($self,$args) = @_;
- print Dumper $args;
  my $school = $args->get('school');
  my $prefecture = $args->get('pref_name');
  my $age = $args->get('age');
-
-
- print Dumper $age;
 
  my @rows = $self->search_named('SELECT * FROM teachers WHERE school = :school OR prefecture = :prefecture OR age = :age ',+{school => $school,prefecture => $prefecture,age => $age});
 
