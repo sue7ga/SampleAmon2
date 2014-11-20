@@ -84,6 +84,7 @@ use Encode;
 
 sub search_teacher{
  my($self,$args) = @_;
+ print Dumper $args;
  my $school = $args->get('school');
  my $prefecture = $args->get('pref_name');
  my $age = $args->get('age');

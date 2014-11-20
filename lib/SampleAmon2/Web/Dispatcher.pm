@@ -26,35 +26,42 @@ use SampleAmon2::Model::Pref;
 my $pref = new SampleAmon2::Model::Pref();
 my @prefs = $pref->show();
 
+#student
 get 'student/register' => "Student#register";
+
+post 'student/register' => "Student#postregister";
+
+get 'student/list' => "Student#list";
+
+post 'student/login' => "Studet#postlogin";
+
+get 'student/mypage' => "Student#mypage";
+
+get '/mypage' => "Student#mypage";
+
+#teacher
 
 get 'teacher/register' => "Teacher#register";
 
 get 'teachers/search' => "Teacher#search";
 
-post 'teachers/search' => sub{
- my ($c) = @_;
- my $teachers =  $c->db->search_teacher($c->req);
- return $c->render('teachers_search.tx',{teachers => $teachers});
-};
+post 'teachers/search' => "Teacher#postsearch";
 
-post 'student/register' => sub{
- my ($c) = @_;
- $c->db->insert_student($c->req->parameters);
- return $c->render('login.tx')
-};
+post 'teacher/register' => "Teacher#postregister"; 
 
-post 'teacher/register' => sub{
- my ($c) = @_;
- $c->db->insert_teacher($c->req->parameters);
- return $c->render('teacher_login.tx');
-};
+get 'teacher/login' => "Teacher#login";
 
-get 'student/list' => "Student#list";
+get 'teacher/mypage' => "Teacher#mypage";
+
+get 'teacher/logout' => "Teacher#logout";
+
+post 'teacher/login' => "Teacher#postlogin";
 
 get 'teacher/list' => "Teacher#list";
 
-get 'login' => "Teacher#login";
+get 'teacher/login' => "Teacher#login";
+
+#js
 
 use SampleAmon2::Model::Person;
 my $person = new SampleAmon2::Model::Person();
@@ -76,43 +83,6 @@ get '/js/modal/teacher' => sub{
   my $teacher_structure = {'teacherinfo' => $info};
  return $c->render_json($teacher_structure);
 };
-
-get 'teacher/login' => "Teacher#login";
-
-get 'teacher/mypage' => "Teacher#mypage";
-
-get 'student/mypage' => "Student#mypage";
-
-get 'logout' => "Teacher#logout";
-
-post 'student/login' => sub{
-  my ($c) = shift;
-  my $email = $c->req->{'amon2.body_parameters'}->{email};
-  my $password = $c->req->{'amon2.body_parameters'}->{password};  
-  my $student = $c->db->get_student_mail_and_pass($email);
-  if($password eq $student->password){
-    $c->session->set('user' => 1);
-    return $c->redirect('/student/mypage');
-  }
-  return $c->redirect('/student/login');
-};
-
-post 'teacher/login' =>sub{
-  my($c) = shift;
-  my $email = $c->req->{'amon2.body_parameters'}->{email};
-  my $password = $c->req->{'amon2.body_parameters'}->{password};
-  my $teacher = $c->db->get_teacher_mail_and_pass($email);
-  unless($teacher){
-    return $c->redirect('/teacher/login');
-  }
-  if($password eq $teacher->password){
-    $c->session->set('teacheruser' => 1);
-    return $c->redirect('/teacher/mypage');
-  }
-};
-
-get '/mypage' => "Student#mypage";
-
 
 1;
 

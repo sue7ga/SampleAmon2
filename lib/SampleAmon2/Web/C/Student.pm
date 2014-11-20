@@ -14,6 +14,24 @@ sub register{
   return $c->render('register.tx',{prefs => \@prefs});
 }
 
+sub postregister{
+ my ($class,$c) = @_;
+ $c->db->insert_student($c->req->parameters);
+ return $c->render('login.tx')
+}
+
+sub postlogin{
+  my ($class,$c) = shift;
+  my $email = $c->req->{'amon2.body_parameters'}->{email};
+  my $password = $c->req->{'amon2.body_parameters'}->{password};  
+  my $student = $c->db->get_student_mail_and_pass($email);
+  if($password eq $student->password){
+    $c->session->set('user' => 1);
+    return $c->redirect('/student/mypage');
+  }
+  return $c->redirect('/student/login');
+}
+
 sub list{
  my ($class,$c) = @_;
  my $students = $c->db->get_students; 

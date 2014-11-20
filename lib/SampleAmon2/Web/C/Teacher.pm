@@ -15,17 +15,28 @@ sub register{
  return $c->render('teacher_register.tx',{prefs => \@prefs});
 };
 
+sub postregister{
+ my ($class,$c) = @_;
+ $c->db->insert_teacher($c->req->parameters);
+ return $c->render('teacher_login.tx');
+};
+
 sub search{
  my($class,$c) = @_;
  return $c->render('teachers_search.tx',{prefs => \@prefs});
 };
+
+sub postsearch{
+ my ($class,$c) = @_;
+ my $teachers =  $c->db->search_teacher($c->req->parameters);
+ return $c->render('teachers_search.tx',{teachers => $teachers});
+}
 
 sub list{
  my ($class,$c) = @_;
  my $teachers = $c->db->get_teachers; 
  return $c->render('teacher_list.tx',{teachers => $teachers});
 }
-
 
 sub login{
  my($class,$c) = @_;
@@ -43,5 +54,19 @@ sub logout{
  $c->session->set('teacher' => 0);
  return $c->redirect('/login');
 };
+
+sub postlogin{
+  my($class,$c) = @_;
+  my $email = $c->req->{'amon2.body_parameters'}->{email};
+  my $password = $c->req->{'amon2.body_parameters'}->{password};
+  my $teacher = $c->db->get_teacher_mail_and_pass($email);
+  unless($teacher){
+    return $c->redirect('/teacher/login');
+  }
+  if($password eq $teacher->password){
+    $c->session->set('teacheruser' => 1);
+    return $c->redirect('/teacher/mypage');
+  }
+}
 
 1;

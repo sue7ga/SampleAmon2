@@ -36,7 +36,6 @@
                     <li><a href="/student/login">生徒ログイン</a></li>
                     <li><a href="/teacher/login">教師ログイン</a></li>
                     <li><a href="/teachers/search">教師検索</a></li>
-                    <li><a href="/student/list">生徒一覧</a></li>
                     <li><a href="/teacher/list">教師一覧</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </ul>
@@ -48,7 +47,7 @@
             <: block content -> { } :>
         </div>
         <footer class="footer">
-            Powered by <a href="http://amon.64p.org/">Amon2</a>
+
         </footer>
     </div>
 </body>
