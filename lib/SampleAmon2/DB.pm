@@ -93,4 +93,10 @@ sub search_teacher{
  return \@rows;
 }
 
+sub search_all_students{
+
+
+
+}
+
 1;

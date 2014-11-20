@@ -1,13 +1,27 @@
 :cascade "include/mypage.tx"
 
 : override content -> {
+<script>
+   var loopCtrl = function($scope,$http) {
+ 
+   $http.get("students/show").success(function(data,status,headers,config){
+      $scope.students = data;
+  });
+}
+ </script>
+  
+ <div ng-controller="loopCtrl">  
+   <p><input type="text" ng-model="query"></p>
+   <ul>
+    <p>{{students.length}} days</p>
+    <li ng-repeat="student in students | filter:query">    
+       {{student.name}} {{student.gender}}</li>
+    </li>
+   </ul>
+ </div>
+</html>
 
-     <div ng-controller="MainCtrl">
-       <input type="search" plackholder="Search" ng-model="search">:
-       <ul ng-repeat="person in people | filter:search">
-         <li>{{person.firstName}} {{person.lastName}}</li>
-       </ul>
-     </div>
-   
+  
+
 
 :}

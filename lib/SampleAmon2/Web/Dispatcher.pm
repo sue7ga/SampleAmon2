@@ -79,6 +79,13 @@ get '/js/modal' => sub{
  return $c->render_json($student_structure);
 };
 
+get '/teacher/student/students/show' =>sub{
+  my($c,$args) = @_;
+  my $students = $c->db->search_all_students();
+  my $students = [{name=>'hoge',gender=>'foo'},{name=>'hey',gender=>'moz'}];  
+   return $c->render_json($students);
+};
+
 get '/js/modal/teacher' => sub{
   my($c,$args) = @_;
   my $teacherid = $c->req->param('teacherid');
