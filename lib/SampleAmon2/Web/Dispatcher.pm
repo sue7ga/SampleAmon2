@@ -84,7 +84,7 @@ get '/teacher/student/students/show' =>sub{
   my $itr = $c->db->search_all_students(); 
   my $students = [];
   while(my $row = $itr->next){
-      push @$students,{name => $row->{name},gender => $row->{gender}}
+      push @$students,{name => $row->name,gender => $row->gender,school => $row->school,prefecture => $row->prefecture}
   }
   print Dumper $students;
   return $c->render_json($students);

@@ -95,7 +95,7 @@ sub search_teacher{
 
 sub search_all_students{
  my ($self) = shift;
- my $itr = $self->search('students',{});
+ my $itr = $self->search('teachers');
  return $itr;
 }
 
