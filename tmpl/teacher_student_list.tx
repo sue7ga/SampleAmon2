@@ -15,7 +15,7 @@
    <ul>
     <p>{{students.length}} days</p>
     <li ng-repeat="student in students | filter:query">    
-       {{student.name}} {{student.gender}}</li>
+       {{student.name}} {{student.gender}}
     </li>
    </ul>
  </div>
