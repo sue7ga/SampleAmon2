@@ -69,6 +69,10 @@ get 'teacher/student/list' => "Teacher#showstudent";
 get 'teacher/setting' => "Teacher#setting";
 
 get 'teacher/show/:id' => "Teacher#show";
+
+post 'teacher/message' => "Teacher#postmessage";
+
+get 'teacher/message' => "Teacher#message";
 #js
 
 use SampleAmon2::Model::Person;

@@ -74,6 +74,13 @@ sub showstudent{
  return $c->render('teacher_student_list.tx');
 }
 
+sub postmessage{
+ my($class,$c,$args) = @_;
+ my $param = $c->req->parameters;
+ print Dumper $param;
+ return $c->redirect('/teacher/mypage');
+}
+
 sub setting{
  my($class,$c) = @_;
  return $c->render('teacher_setting.tx');
@@ -89,7 +96,7 @@ sub show{
  my $prefecture = $student->prefecture;
  my $profile = $student->profile;
  my $day = $student->day;
- return $c->render('teacher_show.tx',{name => $name,gender => $gender,age => $age,school => $school,prefecture => $prefecture,profile => $profile,day => $day});
+ return $c->render('teacher_show.tx',{id => $args->{id},name => $name,gender => $gender,age => $age,school => $school,prefecture => $prefecture,profile => $profile,day => $day});
 }
 
 sub postlogin{
