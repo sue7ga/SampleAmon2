@@ -1,0 +1,67 @@
+:cascade "include/mypage.tx"
+
+: override content -> {
+
+<style type="text/css">
+table {
+	border-collapse: collapse;
+	width:100%;
+}
+th.t_top {
+    border-top: #be1309 4px solid;
+}
+th {
+	border-bottom: #e3e3e3 1px dotted;
+	text-align: left;
+	padding: 10px;
+	font-weight: normal;
+}
+td.t_top {
+	border-top: #b3b3b3 4px solid;
+}
+td {
+	border-bottom: #e3e3e3 1px dotted;
+	text-align: left;
+	padding: 10px;
+}
+tr:hover {
+    background: #3D80DF;
+    color: #FFFFFF;}
+
+</style>
+
+<table summary="会社案内表">
+  <tr>
+    <th class="t_top" width="180">名前</th>
+    <td class="t_top"><:$name:></td>
+  </tr>
+  <tr>
+    <th>性別</th>
+    <td><:$gender:></td>
+  </tr>
+  <tr>
+    <th>学校</th>
+    <td><:$school:></td>
+  </tr>
+  <tr>
+    <th>都道府県</th>
+    <td><:$prefecture:></td>
+  </tr>
+ <tr>
+    <th>自己紹介</th>
+    <td><:$profile:></td>
+  </tr>
+ <tr>
+    <th>指導可能曜日</th>
+    <td><:$day:></td>
+  </tr>
+</table>
+    
+    <form>
+<button type="button" class="btn btn-default btn-lg">
+  <div align="center"><span class="glyphicon glyphicon-star" aria-hidden="true">メッセージを送る</span></div>
+</button>
+    </form>   
+
+:}
+

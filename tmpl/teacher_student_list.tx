@@ -1,25 +1,53 @@
 :cascade "include/mypage.tx"
 
 : override content -> {
-<script>
-   var loopCtrl = function($scope,$http) {
- 
-   $http.get("students/show").success(function(data,status,headers,config){
-      $scope.students = data;
-  });
-}
- </script>
-  
+
  <div ng-controller="loopCtrl">  
-   <p><input type="text" ng-model="query"></p>
-   <ul>
-    <p>{{students.length}} days</p>
-    <li ng-repeat="student in students | filter:query">    
-       {{student.name}} {{student.gender}} {{student.prefecture}} {{student.school}}
-    </li>
-   </ul>
- </div>
-</html>
+   <p>フリーワード検索（高校名、名前、性別、都道府県など）<input type="text" ng-model="query"></p>
+    <table>
+     <tr>
+       <th>名前</th>
+       <th>性別</th>
+       <th>都道府県</th>
+       <th>高校</th>
+       <th>詳細を見る</th>
+     </tr>
+     <tr ng-repeat="student in students | filter:query">
+         <td> {{ student.name }}</td>
+         <td> {{ student.gender }}</td>
+         <td> {{ student.prefecture }}</td>
+         <td> {{ student.school }}</td>
+         <td><a href="/teacher/show/{{student.id}}">詳細を見る</a></td>
+     </tr>
+   </table>
+ </div> 
+
+
+<div id="modal-content">	
+	<p></p>	
+</div>
+
+
+<script>
+
+   var loopCtrl = function($scope,$http) { 
+     $http.get("students/show").success(function(data,status,headers,config){
+        $scope.students = data;
+     });
+   }
+
+  $(".modal-open").on("click",function(e){
+   alert('hoge');
+   var $el = $(e.target);
+   var studentid = $el.val(); 
+     $("body").append('<div id="modal-overlay"></div>'); 
+     $("#modal-overlay").fadeIn("slow");
+     $("#modal-overlay").fadeOut("slow");
+     alert(studentid);
+   });
+
+ 
+</script>
 
   
 

@@ -53,7 +53,14 @@ sub search_by_studentid{
    students => {id => [$studentid]}
  );
  return $itr;
+}
 
+sub search_student_by_id{
+ my($self,$id) = @_;
+ my $itr = $self->single(
+   "students",{id => $id}
+ );
+ return $itr;
 }
 
 sub search_by_teacherid{
@@ -95,7 +102,7 @@ sub search_teacher{
 
 sub search_all_students{
  my ($self) = shift;
- my $itr = $self->search('teachers');
+ my $itr = $self->search('students');
  return $itr;
 }
 

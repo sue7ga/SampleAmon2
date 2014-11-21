@@ -1,0 +1,21 @@
+:cascade "include/mypage.tx"
+
+: override content -> {
+
+<h3>プロフィール設定</h3>
+
+<form name="addUserForm">
+  <div><input ng-model="user.name" 
+
+
+</form>
+
+
+<script>
+ 
+
+</script>
+
+
+
+:}

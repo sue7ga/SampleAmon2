@@ -82,7 +82,7 @@ $(document).ready(function(){
  });
 	//コンテンツをセンタリングする
 
-        $(window).resize(centeringModalSyncer);
+     $(window).resize(centeringModalSyncer);
 
 //センタリングを実行する関数
      function centeringModalSyncer(){

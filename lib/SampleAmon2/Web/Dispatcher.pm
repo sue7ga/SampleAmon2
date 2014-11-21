@@ -65,6 +65,10 @@ get 'teacher/list' => "Teacher#list";
 get 'teacher/login' => "Teacher#login";
 
 get 'teacher/student/list' => "Teacher#showstudent";
+
+get 'teacher/setting' => "Teacher#setting";
+
+get 'teacher/show/:id' => "Teacher#show";
 #js
 
 use SampleAmon2::Model::Person;
@@ -84,9 +88,8 @@ get '/teacher/student/students/show' =>sub{
   my $itr = $c->db->search_all_students(); 
   my $students = [];
   while(my $row = $itr->next){
-      push @$students,{name => $row->name,gender => $row->gender,school => $row->school,prefecture => $row->prefecture}
+      push @$students,{id => $row->id,name => $row->name,gender => $row->gender,school => $row->school,prefecture => $row->prefecture}
   }
-  print Dumper $students;
   return $c->render_json($students);
 };
 

@@ -19,9 +19,7 @@
    <td><: $student.name:></td>
    <td><: $student.school:></td>
    <td><: $student.profile:></td>
-   <td>
-<button type="button" class="btn btn-primary modal-open" value="<:$student.id:>">詳細を見る</button>
-</td>     
+   <td><button type="button" class="btn btn-primary modal-open" value="<:$student.id:>">詳細を見る</button></td>     
   </tr>
  
  
