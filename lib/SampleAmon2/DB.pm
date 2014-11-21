@@ -63,12 +63,26 @@ sub search_student_by_id{
  return $itr;
 }
 
+sub get_now_teacher{
+ my($self,$id) = @_;
+ my $itr = $self->single(
+   "teachers",{id => $id}
+ );
+  return $itr;
+}
+
 sub search_by_teacherid{
  my ($self,$teacherid) = @_;
  my $itr = $self->search(
    teachers => {id => [$teacherid]}
  );
  return $itr;
+}
+
+sub update_teacher{
+ my($self,$params) = @_;
+ $self->update();
+
 }
 
 sub get_student_mail_and_pass{

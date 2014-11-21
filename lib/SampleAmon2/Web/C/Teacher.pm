@@ -77,13 +77,28 @@ sub showstudent{
 sub postmessage{
  my($class,$c,$args) = @_;
  my $param = $c->req->parameters;
- print Dumper $param;
  return $c->redirect('/teacher/mypage');
 }
 
 sub setting{
  my($class,$c) = @_;
- return $c->render('teacher_setting.tx');
+ print Dumper $c->session->get('id');
+ my $teacher = $c->db->get_now_teacher($c->session->get('id'));
+ my $email = $teacher->email;
+ my $age = $teacher->age;
+ my $prefecture = $teacher->prefecture;
+ my $income = $teacher->income;
+ my $day = $teacher->day;
+ my $profile = $teacher->profile;
+ my $teaching = $teacher->teaching;
+ return $c->render('teacher_setting.tx',{prefs => \@prefs,email => $email,age => $age,pref => $prefecture,income => $income,day => $day,profile => $profile,teaching => $teaching});
+}
+
+sub update{
+ my($class,$c,$args) = @_;
+ print Dumper $c->req->parameters;
+ $c->db->update_teacher($c->req->parameters);
+ return $c->redirect('/teacher/mypage');
 }
 
 sub show{
@@ -103,12 +118,13 @@ sub postlogin{
   my($class,$c) = @_;
   my $email = $c->req->{'amon2.body_parameters'}->{email};
   my $password = $c->req->{'amon2.body_parameters'}->{password};
-  my $teacher = $c->db->get_teacher_mail_and_pass($email);
+  my $teacher = $c->db->get_teacher_mail_and_pass($email);  
   unless($teacher){
     return $c->redirect('/teacher/login');
   }
   if($password eq $teacher->password){
     $class->login_required($c->session);
+    $c->session->set('id' => $teacher->id);
     return $c->redirect('/teacher/mypage');
   }
 }

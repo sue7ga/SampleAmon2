@@ -41,7 +41,7 @@
  <dt>指導実績</dt>
  <dd><textarea name="teaching" size="80"></textarea></dd>
  </dl>
- <p><input type="submit" value="送信"></p>
+ <p><input type="submit" value="登録"></p>
 </form>
 
 
