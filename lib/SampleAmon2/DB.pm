@@ -71,6 +71,11 @@ sub get_now_teacher{
   return $itr;
 }
 
+sub update_teacher{
+ my($self,$params,$now_teacher_id) = @_;
+ $self->update('teachers',$params,+{id => $now_teacher_id}); 
+}
+
 sub search_by_teacherid{
  my ($self,$teacherid) = @_;
  my $itr = $self->search(
@@ -79,11 +84,6 @@ sub search_by_teacherid{
  return $itr;
 }
 
-sub update_teacher{
- my($self,$params) = @_;
- $self->update();
-
-}
 
 sub get_student_mail_and_pass{
  my ($self,$email) = @_;

@@ -96,8 +96,10 @@ sub setting{
 
 sub update{
  my($class,$c,$args) = @_;
- print Dumper $c->req->parameters;
- $c->db->update_teacher($c->req->parameters);
+ my $param = $c->req->parameters;
+ $param->remove('email_check');
+ $param->remove('XSRF-TOKEN');
+ $c->db->update_teacher($param,$c->session->get('teacher'));
  return $c->redirect('/teacher/mypage');
 }
 
