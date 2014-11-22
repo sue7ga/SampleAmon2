@@ -74,15 +74,28 @@ sub showstudent{
  return $c->render('teacher_student_list.tx');
 }
 
+sub message{
+ my($class,$c) = @_;
+ my $itr = $c->db->get_message_by_teacherid($c->session->get('teacher'));
+ my $messages = [];
+ while(my $row = $itr->next){
+  my $student = $c->db->search_student_by_id($row->studentid);
+  push $messages,{title => "生徒名：".$student->name."タイトル：".$row->title,content => $row->message};
+ }
+ return $c->render('teacher_message.tx',{messages => $messages});
+}
+
 sub postmessage{
  my($class,$c,$args) = @_;
  my $param = $c->req->parameters;
+ print Dumper $param;
+ my $teacher_id = $c->session->get('teacher');
+ $c->db->send_message_to_student_by_teacher($teacher_id,$param);
  return $c->redirect('/teacher/mypage');
 }
 
 sub setting{
  my($class,$c) = @_;
- print Dumper $c->session->get('id');
  my $teacher = $c->db->get_now_teacher($c->session->get('id'));
  my $email = $teacher->email;
  my $age = $teacher->age;

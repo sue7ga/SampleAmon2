@@ -1,7 +1,11 @@
-:cascade "include/layout.tx"
+:cascade "include/studentmypage.tx"
 
 : override content -> {
   
-Login successful!
+
+
+
+
+
   
 :}

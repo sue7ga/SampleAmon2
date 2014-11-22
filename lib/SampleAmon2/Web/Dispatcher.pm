@@ -72,12 +72,13 @@ get 'teacher/show/:id' => "Teacher#show";
 
 post 'teacher/message' => "Teacher#postmessage";
 
-get 'teacher/message' => "Teacher#message";
+get 'teacher/message/box' => "Teacher#message";
+
+get 'teacher/message/box' => "Teacher#message";
 
 get 'teacher/settings' => "Teacher#setting";
 
 post 'teacher/setting/update' => "Teacher#update";
-
 
 #js
 

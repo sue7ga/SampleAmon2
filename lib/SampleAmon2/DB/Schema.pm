@@ -36,4 +36,18 @@ table{
   }
 };
 
+table{
+  name 'messages';
+  pk 'id';
+  columns qw(id title message studentid teacherid from_to created_at);
+ inflate qr/.+_at/ => sub{
+    my($col_value) = @_;
+    DateTime->from_epoch($col_value);
+  };
+  deflate qr/.+_at/ => sub{
+     my($col_value) = @_;
+    $col_value->epoch;
+  }
+};
+
 1;

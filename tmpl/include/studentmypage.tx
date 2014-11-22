@@ -2,7 +2,7 @@
 <html lang="jp" ng-app>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title><: $title || '教師マイページ' :></title>
+    <title><: $title || '生徒マイページ' :></title>
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta http-equiv="Content-Script-Type" content="text/javascript" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
@@ -28,14 +28,14 @@
     <div class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">教師マイページ</a>
+                <a class="navbar-brand" href="/student/mypage">生徒マイページ</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/teacher/student/list">生徒一覧</a></li>
-                    <li><a href="/teacher/message/box">message</a></li>
-                    <li><a href="/teacher/setting">設定</a></li>
-                    <li><a href="/teacher/logout">Logout</a></li>
+                    <li><a href="/student/teachers/list">教師一覧</a></li>
+                    <li><a href="/student/message/box">message</a></li>
+                    <li><a href="/student/setting">設定</a></li>
+                    <li><a href="/student/logout">Logout</a></li>
                 </ul>
             </div>
         </div><!-- /.container -->
