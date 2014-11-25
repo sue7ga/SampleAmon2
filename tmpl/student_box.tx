@@ -1,4 +1,4 @@
-:cascade "include/message.tx"
+:cascade "include/studentmessage.tx"
 
 : override content -> {
 
