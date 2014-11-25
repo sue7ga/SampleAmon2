@@ -1,0 +1,50 @@
+:cascade "include/message.tx"
+
+: override content -> {
+
+<style type="text/css">
+#acMenu dt{
+  display:block;
+  width:400px;
+  height:50px;
+  line-height:50px;
+  text-align:center;
+  border:#666 1px solid;
+  cursor:pointer;
+}
+
+#acMenu dd{
+ background:#f2f2f2;
+ witdh:200px;
+ height:100px;
+ line-height:50px;
+ text-align:center;
+ border:#666 1px solid;
+ display:none;
+
+}
+
+</style>
+
+<br/><br/><br/><br/><br/><br/><br/><br/>
+
+<dl id="acMenu">
+
+ <dt> hoge</dt>
+ <dd> foo </dd>
+
+</dl>
+
+<script>
+$(function(){ 
+  $("#acMenu dt").on("click",function(){
+   $(this).next().slideToggle();
+});
+
+});
+</script>
+
+
+
+:}
+

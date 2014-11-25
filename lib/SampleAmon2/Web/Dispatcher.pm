@@ -50,6 +50,12 @@ get 'student/teacher/show/:id' => "Student#teacher_show";
 
 post 'toteacher/messsage' => "Student#postmessage";
 
+get 'student/setting' => "Student#setting";
+
+get 'student/message/box' => "Student#settingbox";
+
+get 'student/setting/update' => "Student#setting_update";
+
 #json
 get 'student/teachers/show' => "Student#teachers_show";
 

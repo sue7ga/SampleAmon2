@@ -109,4 +109,20 @@ sub logout{
  return $c->redirect('/student/login');
 }
 
+sub setting{
+ my($class,$c) = @_;
+ return $c->render('student_setting.tx');
+}
+
+sub setting_update{
+ my($class,$c) = @_;
+ print Dumper $c->req->paramters;
+  return $c->redirect('/student/setting/update');
+}
+
+sub settingbox{
+ my($class,$c) = @_;
+ return $c->render('student_box.tx');
+}
+
 1;
