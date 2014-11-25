@@ -101,6 +101,16 @@ sub update_teacher{
  $self->update('teachers',$params,+{id => $now_teacher_id}); 
 }
 
+sub student_update{
+ my($self,$param,$now_student_id) = @_;
+ $self->update('students',$param,+{id => $now_student_id});
+}
+
+sub register_pass{
+ my($self,$param,$now_student_id) = @_;
+ $self->update('students',$param,+{id => $now_student_id});
+}
+
 sub search_by_teacherid{
  my ($self,$teacherid) = @_;
  my $itr = $self->search(

@@ -111,13 +111,41 @@ sub logout{
 
 sub setting{
  my($class,$c) = @_;
- return $c->render('student_setting.tx');
+ my $teacher = $c->db->search_student_by_id($c->session->get('studentid'));
+ my $email = $teacher->email;
+ my $age = $teacher->age;
+ my $prefecture = $teacher->prefecture;
+ my $day = $teacher->day;
+ my $profile = $teacher->profile;
+ return $c->render('student_setting.tx',{prefs => \@prefs,email => $email,age => $age,prefecture => $prefecture,day => $day,profile=>$profile});
 }
 
 sub setting_update{
  my($class,$c) = @_;
- print Dumper $c->req->paramters;
-  return $c->redirect('/student/setting/update');
+ my $param = $c->req->parameters;
+ $param->remove('XSRF-TOKEN');
+ $param->remove('email_check');
+ $c->db->student_update($param,$c->session->get('studentid'));
+ return $c->redirect('/student/setting');
+}
+
+sub password{
+ my($class,$c) = @_;
+ return $c->render('student_password.tx');
+}
+
+sub postpass{
+ my($class,$c) = @_;
+ my $param =  $c->req->parameters;
+ $param->remove('XSRF-TOKEN');
+ if($param->{password} eq $param->{pass_confirm}){
+  $param->remove('pass_confirm');
+  print Dumper $param;
+  $c->db->register_pass($param,$c->session->get('studentid'));
+ }else{
+    return $c->redirect('/settings/password');
+ }
+ return $c->redirect('/settings/password');
 }
 
 sub settingbox{

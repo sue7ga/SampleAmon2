@@ -32,7 +32,7 @@
    : }
    </select>
  </dd>
- <dt>希望時給</fdt>
+ <dt>希望時給</dt>
  <dd><input type="text" name="income" size="80" class="validate number"></dd>
  <dt>指導可能時間・曜日</fdt>
  <dd><input type="text" name="day" size="80"></dd>
@@ -41,7 +41,7 @@
  <dt>指導実績</dt>
  <dd><textarea name="teaching" size="80"></textarea></dd>
  </dl>
- <p><input type="submit" value="登録"></p>
+o <p><input type="submit" value="登録"></p>
 </form>
 
 

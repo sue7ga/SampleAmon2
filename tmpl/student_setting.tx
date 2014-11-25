@@ -2,6 +2,8 @@
 
 : override content -> {
 
+<a href="/settings/password">パスワード変更はこちら！</a>
+
 <h3>プロフィール設定</h3>
 
 
@@ -16,19 +18,16 @@
  <dt>都道府県</dt>
  <dd>
    <select name="prefecture" class="pref" value="<:$prefecture:>">
+     <option value=""><: $prefecture :></option>
    : for $prefs -> $pref{
      <option value="<:$pref:>"><: $pref :></option>
    : }
    </select>
  </dd>
- <dt>希望時給</fdt>
- <dd><input type="text" name="income" size="80" class="validate number" value="<:$income:>"></dd>
  <dt>指導可能時間・曜日</fdt>
  <dd><input type="text" name="day" size="80" class="day" value="<:$day:>"></dd>
  <dt>自己紹介</dt>
  <dd><input type="text" name="profile" id="profile" size="160" class="profile" value="<:$profile:>"></dd>
- <dt>指導実績</dt>
- <dd><input type="text" name="teaching" size="160" class="teaching" value="<:$teaching:>"></dd>
  </dl>
  <p><input type="submit" value="更新"></p>
 </form>
@@ -38,17 +37,13 @@
 
 $(document).ready(function(){
 
- $('input,textarea').css('color','#ccc');
-                                  
-           $('textarea').each(function(){
-              $('textarea').val($(this).val());
-           });
+ $('input,textarea').css('color','#ccc');                                  
 
 	   var input_val=[];
-	   $('input,textarea').each(function() {
+	   $('input').each(function() {
 	        input_val.push($(this).val());
 	   });
-	   $('input,textarea').focus(function(){
+	   $('input').focus(function(){
 	        var chk_num=$('input,textarea').index(this);
 	        var chk_val=$('input,textarea').eq(chk_num).val();
 	        if(chk_val==input_val[chk_num]){

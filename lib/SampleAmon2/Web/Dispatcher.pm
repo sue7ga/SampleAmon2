@@ -54,8 +54,11 @@ get 'student/setting' => "Student#setting";
 
 get 'student/message/box' => "Student#settingbox";
 
-get 'student/setting/update' => "Student#setting_update";
+get 'settings/password' => "Student#password";
 
+post 'student/postpass' => "Student#postpass";
+
+post 'student/setting/update' => "Student#setting_update";
 #json
 get 'student/teachers/show' => "Student#teachers_show";
 
