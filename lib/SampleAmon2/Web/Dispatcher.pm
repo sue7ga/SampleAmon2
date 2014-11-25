@@ -48,7 +48,7 @@ get 'student/teachers/list' => "Student#teacherslist";
 
 get 'student/teacher/show/:id' => "Student#teacher_show";
 
-post 'toteacher/messsage' => "Student#postmessage";
+post 'toteacher/message' => "Student#postmessage";
 
 get 'student/setting' => "Student#setting";
 

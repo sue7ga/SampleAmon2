@@ -89,15 +89,15 @@ sub teacher_show{
  my $prefecture = $teacher->prefecture;
  my $profile = $teacher->profile;
  my $day = $teacher->day;
- return $c->render('student_teacher_detail.tx',{name => $name,school => $school,prefecture =>$prefecture,profile=>$profile,day=>$day});
+ return $c->render('student_teacher_detail.tx',{id => $id,name => $name,school => $school,prefecture =>$prefecture,profile=>$profile,day=>$day});
 }
 
 sub postmessage{
  my($class,$c) = @_;
  my $param = $c->req->parameters;
  print Dumper $param;
- #my $student = $c->db->search_student_by_id($c->session->get('studentid'));
- #$c->db->send_message_to_teacher_by_student($student->id,$param);
+ my $student = $c->db->search_student_by_id($c->session->get('studentid'));
+ $c->db->send_message_to_teacher_by_student($student->id,$param);
  return $c->redirect('/student/teachers/list');
 }
 

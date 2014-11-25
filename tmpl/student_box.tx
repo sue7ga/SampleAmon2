@@ -3,45 +3,83 @@
 : override content -> {
 
 <style type="text/css">
-#acMenu dt{
-  display:block;
-  width:400px;
-  height:50px;
-  line-height:50px;
-  text-align:center;
-  border:#666 1px solid;
-  cursor:pointer;
+html,body{
+ margin:0;
+ padding:0;
+ height:100%;
+}
+dl dt{
+ margin:20px 50px;
+ font-size:large;
+ border:1px solid #7BAEB5;
+ border-left:1em solid #7BAEB5;
+ padding-left:10px;
+ width:600px;
+ cursor:pointer;
 }
 
-#acMenu dd{
- background:#f2f2f2;
- witdh:200px;
- height:100px;
- line-height:50px;
- text-align:center;
- border:#666 1px solid;
- display:none;
+#glayLayer{
+display:none;
+position:fixed:
+left:0;
+top:0;
+height:100%;
+width:100%;
+background:#7BAEB5;
+filter:alpha(opacity=75);
+opacity:0.75;
+}
 
+#overLayer{
+ display:none;
+ width:400px;
+ background:white;
+ padding:10px;
+ position:fixed;
+top :50%;
+ left:50%;
 }
 
 </style>
 
 <br/><br/><br/><br/><br/><br/><br/><br/>
 
-<dl id="acMenu">
+<dl>
 
  <dt> hoge</dt>
  <dd> foo </dd>
 
+ <dt> zoo</dt>
+ <dd> bar </dd>
+
+ <dt> hoge</dt>
+ <dd> koko</dd>
+
+ <dt>titlet</dt>
+ <dd> content</dd>
+
 </dl>
 
 <script>
-$(function(){ 
-  $("#acMenu dt").on("click",function(){
-   $(this).next().slideToggle();
+
+$(function(){
+
+ $("dd").hide();
+ $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
+$("#glayLayer").click(function(){
+  $(this).hide();
+  $("#overLayer").hide();
+  });
+$("dt").click(function(){
+  $("#glayLayer").show();
+  $("#overLayer").show().html($("+dd",this).html()).css({
+    "margin-top":"-"+$("#overLayer").height()/2 + "px",
+    "margin-left":"-"+$("#overLayer").width()/2 + "px"
+ });
+});
 });
 
-});
+
 </script>
 
 
