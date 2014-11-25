@@ -150,8 +150,8 @@ sub search_all_students{
 
 sub search_all_teachers{
  my ($self) = shift;
- my @rows = $self->search('teachers');
- return \@rows;
+ my $itr = $self->search('teachers');
+ return $itr;
 }
 
 sub search_all_teachers_by_itr{

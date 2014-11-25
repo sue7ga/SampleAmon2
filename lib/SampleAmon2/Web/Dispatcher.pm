@@ -42,6 +42,15 @@ get 'student/mypage' => "Student#mypage";
 
 get '/mypage' => "Student#mypage";
 
+get 'student/teachers/list' => "Student#teacherslist";
+
+get 'student/teacher/show/:id' => "Student#teacher_show";
+
+post 'toteacher/messsage' => "Student#postmessage";
+
+#json
+get 'student/teachers/show' => "Student#teachers_show";
+
 #teacher
 
 get 'teacher/register' => "Teacher#register";

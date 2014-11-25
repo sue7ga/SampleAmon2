@@ -1,5 +1,4 @@
 package SampleAmon2::Web::C::Student;
-
 use strict;
 use warnings;
 
@@ -62,6 +61,38 @@ sub mypage{
    return $c->redirect('/student/login');
  }
  return $c->render('mypage.tx');
+}
+
+sub teacherslist{
+ my($class,$c) = @_;
+ return $c->render('student_teachers_list.tx');
+}
+
+sub teachers_show{
+ my($class,$c) = @_;
+ my $itr = $c->db->search_all_teachers();
+ my $teachers = [];
+  while(my $row = $itr->next){
+      push @$teachers,{id => $row->id,name => $row->name,gender => $row->gender,school => $row->school,prefecture => $row->prefecture}
+  }
+  return $c->render_json($teachers);
+}
+
+sub teacher_show{
+ my($class,$c,$args) = @_;
+ my $teacher = $c->db->get_now_teacher($args->{id});
+ my $name = $teacher->name;
+ my $school = $teacher->school;
+ my $prefecture = $teacher->prefecture;
+ my $profile = $teacher->profile;
+ my $day = $teacher->day;
+ return $c->render('student_teacher_detail.tx',{name => $name,school => $school,prefecture =>$prefecture,profile=>$profile,day=>$day});
+}
+
+sub postmessage{
+ my($class,$c) = @_;
+ print Dumper $c->req->parameters;
+ return $c->redirect('/student/teachers/list');
 }
 
 1;

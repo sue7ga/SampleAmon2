@@ -1,0 +1,45 @@
+: cascade "include/studentmypage.tx";
+
+: override content -> {
+
+ <div ng-controller="loopCtrl">
+<p>フリーワード検索（高校名、名前、性別、都道府県など）<input type="text" ng-model="query"></p>
+<table>
+<tr>
+<th>名前</th>
+<th>性別</th>
+<th>都道府県</th>
+<th>高校</th>
+<th>詳細を見る</th>
+</tr>
+<tr ng-repeat="teacher in teachers | filter:query">
+<td> {{ teacher.name }}</td>
+<td> {{ teacher.gender }}</td>
+<td> {{ teacher.prefecture }}</td>
+<td> {{ teacher.school }}</td>
+<td><a href="/student/teacher/show/{{teacher.id}}">詳細を見る</a></td>
+</tr>
+</table>
+</div>
+<div id="modal-content">
+<p></p>
+</div>
+<script>
+var loopCtrl = function($scope,$http) {
+$http.get("/student/teachers/show").success(function(data,status,headers,config){
+$scope.teachers = data;
+});
+}
+$(".modal-open").on("click",function(e){
+alert('hoge');
+var $el = $(e.target);
+var teacherid = $el.val();
+$("body").append('<div id="modal-overlay"></div>');
+$("#modal-overlay").fadeIn("slow");
+$("#modal-overlay").fadeOut("slow");
+alert(teacherid);
+});
+</script>
+
+
+:}
