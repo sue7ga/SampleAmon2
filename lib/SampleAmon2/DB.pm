@@ -29,6 +29,11 @@ sub send_message_to_student_by_teacher{
  $self->insert('messages',{teacherid => $teacher_id,studentid => $param->{studentid},title => $param->{title},message=> $param->{message},from_to => 0});
 }
 
+sub send_message_to_teacher_by_student{
+ my($self,$student_id,$param) = @_;
+ $self->insert('messages',{teacherid => $param->{teacherid},studentid => $student_id,title => $param->{title},message=> $param->{message},from_to => 1});
+}
+
 sub get_message_inbox_by_teacherid{
  my($self,$teacherid) = @_;
  my $itr = $self->search(

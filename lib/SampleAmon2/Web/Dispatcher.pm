@@ -81,7 +81,7 @@ get 'teacher/show/:id' => "Teacher#show";
 
 get 'teachers/detail/:id' =>"Teacher#detail";
 
-post 'teacher/message/' => "Teacher#postmessage";
+post 'teacher/message' => "Teacher#postmessage";
 
 get 'teacher/message/sendbox' => "Teacher#message";
 

@@ -82,6 +82,7 @@ sub teacher_show{
  my($class,$c,$args) = @_;
  my $teacher = $c->db->get_now_teacher($args->{id});
  my $name = $teacher->name;
+ my $id = $teacher->id;
  my $school = $teacher->school;
  my $prefecture = $teacher->prefecture;
  my $profile = $teacher->profile;
@@ -91,7 +92,10 @@ sub teacher_show{
 
 sub postmessage{
  my($class,$c) = @_;
- print Dumper $c->req->parameters;
+ my $param = $c->req->parameters;
+ print Dumper $param;
+ #my $student = $c->db->search_student_by_id($c->session->get('studentid'));
+ #$c->db->send_message_to_teacher_by_student($student->id,$param);
  return $c->redirect('/student/teachers/list');
 }
 
