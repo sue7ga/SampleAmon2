@@ -70,48 +70,28 @@ get 'teacher/setting' => "Teacher#setting";
 
 get 'teacher/show/:id' => "Teacher#show";
 
-post 'teacher/message' => "Teacher#postmessage";
+get 'teachers/detail/:id' =>"Teacher#detail";
 
-get 'teacher/message/box' => "Teacher#message";
+post 'teacher/message/' => "Teacher#postmessage";
 
-get 'teacher/message/box' => "Teacher#message";
+get 'teacher/message/sendbox' => "Teacher#message";
+
+get 'teacher/message/box' => "Teacher#inbox";
 
 get 'teacher/settings' => "Teacher#setting";
 
 post 'teacher/setting/update' => "Teacher#update";
 
+#json
+get 'teachers/show' => "Teacher#jsonshow";
+
 #js
 
-use SampleAmon2::Model::Person;
-my $person = new SampleAmon2::Model::Person();
+get '/js/modal' => "Teacher#jsonmodal";
 
-get '/js/modal' => sub{
- my($c,$args) = @_;
- my $studentid =  $c->req->param('studentid'); 
- my $student = $c->db->search_by_studentid($studentid);
- my $info = $person->modal_info($student);
- my $student_structure = {'studentinfo' => $info};
- return $c->render_json($student_structure);
-};
+get '/teacher/student/students/show' => "Teacher#json_student_show";
 
-get '/teacher/student/students/show' =>sub{
-  my($c,$args) = @_;
-  my $itr = $c->db->search_all_students(); 
-  my $students = [];
-  while(my $row = $itr->next){
-      push @$students,{id => $row->id,name => $row->name,gender => $row->gender,school => $row->school,prefecture => $row->prefecture}
-  }
-  return $c->render_json($students);
-};
-
-get '/js/modal/teacher' => sub{
-  my($c,$args) = @_;
-  my $teacherid = $c->req->param('teacherid');
-  my $teacher = $c->db->search_by_teacherid($teacherid);
-  my $info = $person->modal_info($teacher);
-  my $teacher_structure = {'teacherinfo' => $info};
- return $c->render_json($teacher_structure);
-};
+get '/js/modal/teacher' => "Teacher#jsonmodalteacher";
 
 1;
 

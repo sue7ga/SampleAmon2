@@ -29,6 +29,15 @@ sub send_message_to_student_by_teacher{
  $self->insert('messages',{teacherid => $teacher_id,studentid => $param->{studentid},title => $param->{title},message=> $param->{message},from_to => 0});
 }
 
+sub get_message_inbox_by_teacherid{
+ my($self,$teacherid) = @_;
+ my $itr = $self->search(
+   messages => {teacherid => [$teacherid],from_to => 1}
+ );
+ return $itr;
+ 
+}
+
 sub insert_teacher{
   my($self,$args) = @_;
  
@@ -96,6 +105,13 @@ sub search_by_teacherid{
  return $itr;
 }
 
+sub search_teacher_by_id{
+ my ($self,$teacherid) = @_;
+ my $itr = $self->single(
+   'teachers',{id => $teacherid}
+ );
+ return $itr;
+}
 
 sub get_student_mail_and_pass{
  my ($self,$email) = @_;
@@ -129,6 +145,18 @@ sub search_teacher{
 sub search_all_students{
  my ($self) = shift;
  my $itr = $self->search('students');
+ return $itr;
+}
+
+sub search_all_teachers{
+ my ($self) = shift;
+ my @rows = $self->search('teachers');
+ return \@rows;
+}
+
+sub search_all_teachers_by_itr{
+ my($self) = @_;
+ my $itr = $self->search('teachers');
  return $itr;
 }
 

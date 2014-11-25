@@ -26,9 +26,9 @@
  <dt>指導可能時間・曜日</fdt>
  <dd><input type="text" name="day" size="80" class="day" value="<:$day:>"></dd>
  <dt>自己紹介</dt>
- <dd><textarea name="profile" id="profile" cols="50" rows="10" class="profile" value="<:$profile:>"></textarea></dd>
+ <dd><input type="text" name="profile" id="profile" size="160" class="profile" value="<:$profile:>"></dd>
  <dt>指導実績</dt>
- <dd><textarea name="teaching" size="160" class="teaching" value="<:$teaching:>"></textarea></dd>
+ <dd><input type="text" name="teaching" size="160" class="teaching" value="<:$teaching:>"></dd>
  </dl>
  <p><input type="submit" value="更新"></p>
 </form>

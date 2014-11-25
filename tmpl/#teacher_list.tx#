@@ -1,41 +1,43 @@
 :cascade "include/layout.tx"
 
 : override content -> {
+  
+ <table>
+  <tr>
+   <th>email</th>
+   <th>name</th>
+   <th>school</th>
+   <th>age</th>
+   <th>gender</th>
+   <th>prefecture</th>
+   <th>profile</th>
+   <th>詳細</th>
+  </tr>
+: for $teachers -> $teacher{
 
- <div ng-controller="loopCtrl">  
-   <p>フリーワード検索（高校名、名前、性別、都道府県など）<input type="text" ng-model="query"></p>
-    <table>
-     <tr>
-       <th>名前</th>
-       <th>性別</th>
-       <th>都道府県</th>
-       <th>高校</th>
-       <th>詳細を見る</th>
-     </tr>
-     <tr ng-repeat="teacher in teachers | filter:query">
-         <td> {{ teacher.name }}</td>
-         <td> {{ teacher.gender }}</td>
-         <td> {{ teacher.prefecture }}</td>
-         <td> {{ teacher.school }}</td>
-<td><a href="/teachers/detail/{{teacher.id}}">詳細を見る</a></button>
-</td>
-     </tr>
-   </table>
- </div> 
+  <tr>
+   <td><: $teacher.email:></td>
+   <td><: $teacher.name:></td>
+   <td><: $teacher.school:></td>
+   <td><: $teacher.age:></td>
+   <td><: $teacher.gender:></td>
+   <td><: $teacher.prefecture:></td>
+   <td><: $teacher.profile:></td>
+   <td>
+<button type="button" class="btn btn-primary modal-open" value="<:$teacher.id:>">詳細を見る</button>
+</td>     
+  </tr>
 
+: }
+</table>
 
 <div id="modal-content">	
 	<p></p>	
 </div>
 
+<script type="text/javascript">
 
-<script>
-   var loopCtrl = function($scope,$http){ 
-     $http.get("/teachers/show").success(function(data,status,headers,config){
-        $scope.teachers = data;
-     });
-   }
-
+$(document).ready(function(){
   $(".modal-open").on("click",function(e){
      var $el = $(e.target);
      var teacherid = $el.val();	
@@ -97,6 +99,7 @@
 	$("#modal-content").css({"left": 300 + "px","top": 200 + "px"})
      }
 
+});
 
 </script>
 

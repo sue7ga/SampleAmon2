@@ -39,8 +39,9 @@ sub search{
 
 sub postsearch{
  my ($class,$c) = @_;
- my $teachers =  $c->db->search_teacher($c->req->parameters);
- return $c->render('teachers_search.tx',{teachers => $teachers});
+ #my $teachers =  $c->db->search_teacher($c->req->parameters);
+ #my $teachers = $c->db->search_all_teachers();
+ return $c->render('teachers_search.tx');
 }
 
 sub list{
@@ -52,6 +53,18 @@ sub list{
 sub login{
  my($class,$c) = @_;
  return $c->render('teacher_login.tx');
+}
+
+sub detail{
+ my($class,$c,$args) = @_;
+ my $teacher = $c->db->search_teacher_by_id($args->{id});
+ my $email = $teacher->email;
+ my $name = $teacher->name;
+ my $gender = $teacher->gender;
+ my $school = $teacher->school;
+ my $prefecture = $teacher->prefecture;
+ my $profile = $teacher->profile;
+ return $c->render('teacher_detail.tx',{name => $name,email => $email,gender => $gender,school=> $school,prefecture => $prefecture,profile => $profile});
 }
 
 sub mypage{
@@ -85,10 +98,63 @@ sub message{
  return $c->render('teacher_message.tx',{messages => $messages});
 }
 
+sub jsonshow{
+ my($class,$c) = @_;
+my $itr = $c->db->search_all_teachers_by_itr();
+  my $teachers = [];
+  while(my $row = $itr->next){
+      push @$teachers,{id => $row->id,name => $row->name,gender => $row->gender,school => $row->school,prefecture => $row->prefecture}
+  }
+  return $c->render_json($teachers);
+}
+
+sub json_student_show{
+ my($class,$c) = @_;
+ my $itr = $c->db->search_all_students(); 
+  my $students = [];
+  while(my $row = $itr->next){
+      push @$students,{id => $row->id,name => $row->name,gender => $row->gender,school => $row->school,prefecture => $row->prefecture}
+  }
+  return $c->render_json($students);
+}
+
+#json
+
+use SampleAmon2::Model::Person;
+my $person = new SampleAmon2::Model::Person();
+
+sub jsonmodalteacher{
+  my($class,$c) = @_;
+  my $teacherid = $c->req->param('teacherid');
+  my $teacher = $c->db->search_by_teacherid($teacherid);
+  my $info = $person->modal_info($teacher);
+  my $teacher_structure = {'teacherinfo' => $info};
+ return $c->render_json($teacher_structure);
+}
+
+sub jsonmodal{
+ my($class,$c) =  @_;
+ my $studentid =  $c->req->param('studentid'); 
+ my $student = $c->db->search_by_studentid($studentid);
+ my $info = $person->modal_info($student);
+ my $student_structure = {'studentinfo' => $info};
+ return $c->render_json($student_structure);
+}
+
+sub inbox{
+ my($class,$c) = @_;
+ my $itr = $c->db->get_message_inbox_by_teacherid($c->session->get('teacher')); 
+ my $messages = [];
+ while(my $row = $itr->next){
+   my $student = $c->db->search_student_by_id($row->studentid); 
+   push $messages,{title => "生徒名：".$student->name."タイトル：".$row->title,content => $row->message};
+ } 
+ return $c->render('teacher_inbox.tx',{messages => $messages});
+}
+
 sub postmessage{
  my($class,$c,$args) = @_;
  my $param = $c->req->parameters;
- print Dumper $param;
  my $teacher_id = $c->session->get('teacher');
  $c->db->send_message_to_student_by_teacher($teacher_id,$param);
  return $c->redirect('/teacher/mypage');

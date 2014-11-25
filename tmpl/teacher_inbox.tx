@@ -30,7 +30,7 @@
 
 <dl id="acMenu">
 :for $messages -> $message{
- <dt> <:$message.title:></dt>
+ <dt> <:$message.title:></dt>返信する
  <dd> <:$message.content :> </dd>
 :}
 </dl>
