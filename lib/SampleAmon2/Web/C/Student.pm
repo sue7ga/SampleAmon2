@@ -40,6 +40,8 @@ sub postlogin{
   my $student = $c->db->get_student_mail_and_pass($email);
   if($password eq $student->password){
     $c->session->set('student' => 1);
+    $c->session->set('studentid' => $student->id);
+    print Dumper $c->session->get('student');
     return $c->redirect('/student/mypage');
   }
   return $c->redirect('/student/login');
@@ -97,6 +99,14 @@ sub postmessage{
  #my $student = $c->db->search_student_by_id($c->session->get('studentid'));
  #$c->db->send_message_to_teacher_by_student($student->id,$param);
  return $c->redirect('/student/teachers/list');
+}
+
+sub logout{
+ my($class,$c) = @_;
+ $c->session->set('student'=> 0);
+ print Dumper $c->session->get('student');
+ print Dumper $c->session->get('studentid');
+ return $c->redirect('/student/login');
 }
 
 1;

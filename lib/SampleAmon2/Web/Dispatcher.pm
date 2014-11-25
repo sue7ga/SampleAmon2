@@ -36,6 +36,8 @@ get 'student/list' => "Student#list";
 
 get 'student/login' => "Student#login";
 
+get 'student/logout' => "Student#logout";
+
 post 'student/login' => "Student#postlogin";
 
 get 'student/mypage' => "Student#mypage";
