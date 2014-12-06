@@ -174,4 +174,12 @@ sub search_all_teachers_by_itr{
  return $itr;
 }
 
+sub get_message_inbox{
+ my($self,$studentid) = @_;
+ my $itr = $self->search(
+   messages => {studentid => [$studentid],from_to => 0}
+ );
+ return $itr;
+}
+
 1;

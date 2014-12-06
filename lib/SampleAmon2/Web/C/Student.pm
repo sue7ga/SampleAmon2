@@ -150,7 +150,12 @@ sub postpass{
 
 sub settingbox{
  my($class,$c) = @_;
- return $c->render('student_box.tx');
+ my $itr = $c->db->get_message_inbox($c->session->get('studentid'));
+ my $messages = [];
+ while(my $row = $itr->next){ 
+   push @$messages,{title=>$row->title,content => $row->message};
+ }
+ return $c->render('student_box.tx',{messages => $messages});
 }
 
 1;

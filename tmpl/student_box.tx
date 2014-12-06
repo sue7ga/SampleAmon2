@@ -3,41 +3,25 @@
 : override content -> {
 
 <style type="text/css">
-html,body{
- margin:0;
- padding:0;
- height:100%;
+
+dl{
+ width:800px;
+ margin:50px auto;
 }
-dl dt{
- margin:20px 50px;
+
+dt{
+ line-height:35px;
  font-size:large;
- border:1px solid #7BAEB5;
- border-left:1em solid #7BAEB5;
- padding-left:10px;
- width:600px;
- cursor:pointer;
+ text-indent:3em;
+ font-weight:bold;
+ color:black;
+ height:35px;
 }
 
-#glayLayer{
-display:none;
-position:fixed:
-left:0;
-top:0;
-height:100%;
-width:100%;
-background:#7BAEB5;
-filter:alpha(opacity=75);
-opacity:0.75;
-}
-
-#overLayer{
- display:none;
- width:400px;
- background:white;
- padding:10px;
- position:fixed;
-top :50%;
- left:50%;
+dd{
+ margin:0;
+ height:300px;
+ background:#D4D0C8;
 }
 
 </style>
@@ -45,44 +29,60 @@ top :50%;
 <br/><br/><br/><br/><br/><br/><br/><br/>
 
 <dl>
+:for $messages -> $message{
+ <dt> <: $message.title :></dt>
+ <dd> <:$message.content :> </dd>
 
- <dt> hoge</dt>
- <dd> foo </dd>
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  返信する
+</button>
 
- <dt> zoo</dt>
- <dd> bar </dd>
-
- <dt> hoge</dt>
- <dd> koko</dd>
-
- <dt>titlet</dt>
- <dd> content</dd>
-
+:}
 </dl>
 
+
+<!--
+ 
+    Modalの中身
+    ・フェードインさせるときはfadeをつける
+    ・ヘッダー、ボディ、フッターに分けることができる
+ 
+-->
+ 
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+<form action="/teacher/message" method="post">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">
+                <input type="hidden" name="studentid" value="<:$id:>">
+                <textarea type="text" rows="1" cols="3" name="title" class="form-control" id="exampleInputEmail2" placeholder="title"></textarea>
+                </h4>
+            </div>
+            <div class="modal-body">
+              <textarea name="message" rows="4" cols="65"></textarea>
+            </div>
+ <div class="modal-footer">
+<input type="submit" value="送信"><input type="reset" value="リセット">
+</div>
+</form>
+        </div>
+    </div>
+</div>
+
+
 <script>
-
-$(function(){
-
- $("dd").hide();
- $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
-$("#glayLayer").click(function(){
-  $(this).hide();
-  $("#overLayer").hide();
-  });
-$("dt").click(function(){
-  $("#glayLayer").show();
-  $("#overLayer").show().html($("+dd",this).html()).css({
-    "margin-top":"-"+$("#overLayer").height()/2 + "px",
-    "margin-left":"-"+$("#overLayer").width()/2 + "px"
+$(function(){ 
+  $("dd:not(:first)").css("display","none"); 
+  $("dl dt").click(function(){
+   if($("+dd",this).css("display")=="none"){
+    $("dd").slideUp("slow");
+    $("+dd",this).slideDown("slow");
+   }
  });
 });
-});
-
-
 </script>
-
-
 
 :}
 
