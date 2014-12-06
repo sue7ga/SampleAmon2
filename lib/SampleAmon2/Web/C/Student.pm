@@ -152,10 +152,18 @@ sub settingbox{
  my($class,$c) = @_;
  my $itr = $c->db->get_message_inbox($c->session->get('studentid'));
  my $messages = [];
- while(my $row = $itr->next){ 
-   push @$messages,{title=>$row->title,content => $row->message};
+ while(my $row = $itr->next){   
+   push @$messages,{id => $row->id,title=>$row->title,content => $row->message};
  }
  return $c->render('student_box.tx',{messages => $messages});
+}
+
+sub sendmessage{
+ my($class,$c,$args) = @_;
+ my $param = $c->req->parameters;
+ my $student_id = $c->session->get('studentid');
+ $c->db->send_message_to_teacher_by_student($student_id,$param);
+ return $c->redirect('/student/message/box');
 }
 
 1;
