@@ -2,39 +2,45 @@
 
 : override content -> {
 
+
 <style type="text/css">
-
-dl{
- width:800px;
- margin:50px auto;
+#acMenu dt{
+  display:block;
+  width:400px;
+  height:50px;
+  line-height:50px;
+  text-align:center;
+  border:#666 1px solid;
+  cursor:pointer;
 }
 
-dt{
- line-height:35px;
- font-size:large;
- text-indent:3em;
- font-weight:bold;
- color:black;
- height:35px;
-}
+#acMenu dd{
+ background:#f2f2f2;
+ witdh:200px;
+ height:100px;
+ line-height:50px;
+ text-align:center;
+ border:#666 1px solid;
+ display:none;
 
-dd{
- margin:0;
- height:300px;
- background:#D4D0C8;
 }
 
 </style>
 
 <br/><br/><br/><br/><br/><br/><br/><br/>
 
-<dl>
+<dl id="acMenu">
 :for $messages -> $message{
- <dt> <: $message.title :></dt>
+ <dt> <:$message.title:></dt>
  <dd> <:$message.content :> </dd>
 
 <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
   返信する
+</button>
+
+<button class="btn btn-primary" onClick="disp()" >
+<input type="hidden" name="teacherid" value="<:$message.id:>">
+  ゴミ箱に捨てる
 </button>
 
 
@@ -62,30 +68,37 @@ dd{
 
 
 :}
-</dl>
-
-
-<!--
- 
-    Modalの中身
-    ・フェードインさせるときはfadeをつける
-    ・ヘッダー、ボディ、フッターに分けることができる
- 
--->
- 
-
 
 <script>
 $(function(){ 
-  $("dd:not(:first)").css("display","none"); 
-  $("dl dt").click(function(){
-   if($("+dd",this).css("display")=="none"){
-    $("dd").slideUp("slow");
-    $("+dd",this).slideDown("slow");
-   }
- });
+  $("#acMenu dt").on("click",function(){
+   $(this).next().slideToggle();
 });
+});
+
+
+function disp(){
+
+	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
+	if(window.confirm('本当にいいんですね？')){
+
+		location.href = "/message/delete"; // example_confirm.html へジャンプ
+
+	}
+	// 「OK」時の処理終了
+
+	// 「キャンセル」時の処理開始
+	else{
+
+		window.alert('キャンセルされました'); // 警告ダイアログを表示
+
+	}
+	// 「キャンセル」時の処理終了
+
+}
+
 </script>
 
-:}
 
+
+:}

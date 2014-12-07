@@ -108,6 +108,11 @@ my $itr = $c->db->search_all_teachers_by_itr();
   return $c->render_json($teachers);
 }
 
+sub messagedelete{
+ my($class,$c) = @_;
+ return $c->redirect('/teacher/message/box');
+}
+
 sub json_student_show{
  my($class,$c) = @_;
  my $itr = $c->db->search_all_students(); 

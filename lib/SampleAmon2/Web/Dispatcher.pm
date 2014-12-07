@@ -67,7 +67,7 @@ get 'student/teachers/show' => "Student#teachers_show";
 
 
 #teacher
-
+get 'message/delete' => "Teacher#messagedelete";
 get 'teacher/register' => "Teacher#register";
 
 get 'teachers/search' => "Teacher#search";
