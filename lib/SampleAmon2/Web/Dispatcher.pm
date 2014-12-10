@@ -108,6 +108,8 @@ get 'teacher/settings' => "Teacher#setting";
 
 post 'teacher/setting/update' => "Teacher#update";
 
+post 'teacher/message' => "Teacher#sendmessage";
+
 #json
 get 'teachers/show' => "Teacher#jsonshow";
 

@@ -92,6 +92,7 @@ sub message{
  my $itr = $c->db->get_message_by_teacherid($c->session->get('teacher'));
  my $messages = [];
  while(my $row = $itr->next){
+  next if $row->studentid eq 'NULL';
   my $student = $c->db->search_student_by_id($row->studentid);
   push $messages,{title => "生徒名：".$student->name."タイトル：".$row->title,content => $row->message};
  }
@@ -152,7 +153,7 @@ sub inbox{
  my $messages = [];
  while(my $row = $itr->next){
    my $student = $c->db->search_student_by_id($row->studentid); 
-   push $messages,{title => "生徒名：".$student->name."タイトル：".$row->title,content => $row->message};
+   push $messages,{id => $student->id,title => "生徒名：".$student->name."タイトル：".$row->title,content => $row->message};
  } 
  return $c->render('teacher_inbox.tx',{messages => $messages});
 }
@@ -213,6 +214,14 @@ sub postlogin{
     $c->session->set('id' => $teacher->id);
     return $c->redirect('/teacher/mypage');
   }
+}
+
+sub sendmessage{
+ my($class,$c) = @_;
+ my $param = $c->req->parameters;
+ my $teacher_id = $c->session->get('teacher');
+ $c->db->send_message_to_student_by_teacher($teacher_id,$param);
+ return $c->redirect('/teacher/message/box');
 }
 
 1;
