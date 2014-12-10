@@ -166,4 +166,11 @@ sub sendmessage{
  return $c->redirect('/student/message/box');
 }
 
+sub sendbox{
+ my($class,$c) = @_;
+ my @sendmessages = $c->db->get_send_messages($c->session->get('studentid'));
+ print Dumper @sendmessages;
+ return $c->render('student_sendbox.tx',{sendmessages => \@sendmessages});
+}
+
 1;

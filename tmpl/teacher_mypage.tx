@@ -2,6 +2,7 @@
 
 : override content -> {
 
+
   
    <form class="well form-search">
      <input type="text" class="input-medium search-query">

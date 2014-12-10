@@ -1,0 +1,47 @@
+:cascade "include/studentmessage.tx"
+
+: override content -> {
+
+<style type="text/css">
+#acMenu dt{
+  display:block;
+  width:400px;
+  height:50px;
+  line-height:50px;
+  text-align:center;
+  border:#666 1px solid;
+  cursor:pointer;
+}
+
+#acMenu dd{
+ background:#f2f2f2;
+ witdh:200px;
+ height:100px;
+ line-height:50px;
+ text-align:center;
+ border:#666 1px solid;
+ display:none;
+
+}
+
+</style>
+
+<dl id="acMenu">
+: for $sendmessages -> $sendmessage {
+  <dt> <:$sendmessage.title:></dt>
+  <dd> <:$sendmessage.message:></dd>
+:}
+</dl>
+
+<script>
+$(function(){ 
+  $("#acMenu dt").on("click",function(){
+   $(this).next().slideToggle();
+});
+});
+</script>
+
+
+:}
+
+

@@ -182,4 +182,12 @@ sub get_message_inbox{
  return $itr;
 }
 
+sub get_send_messages{
+ my ($self,$studentid) = @_;
+ my @messages = $self->search(
+    messages => {studentid => $studentid,from_to => 1}
+ );
+ return @messages;
+}
+
 1;

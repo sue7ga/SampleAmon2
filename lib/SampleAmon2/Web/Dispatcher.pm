@@ -54,6 +54,8 @@ get 'student/setting' => "Student#setting";
 
 get 'student/message/box' => "Student#settingbox";
 
+get 'student/message/sendbox' => "Student#sendbox";
+
 get 'settings/password' => "Student#password";
 
 post 'student/postpass' => "Student#postpass";

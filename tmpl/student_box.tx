@@ -38,11 +38,6 @@
   返信する
 </button>
 
-<button class="btn btn-primary" onClick="disp()" >
-<input type="hidden" name="teacherid" value="<:$message.id:>">
-  ゴミ箱に捨てる
-</button>
-
 
 <div id="myModal" class="modal fade">
     <div class="modal-dialog">
@@ -75,28 +70,6 @@ $(function(){
    $(this).next().slideToggle();
 });
 });
-
-
-function disp(){
-
-	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
-	if(window.confirm('本当にいいんですね？')){
-
-		location.href = "/message/delete"; // example_confirm.html へジャンプ
-
-	}
-	// 「OK」時の処理終了
-
-	// 「キャンセル」時の処理開始
-	else{
-
-		window.alert('キャンセルされました'); // 警告ダイアログを表示
-
-	}
-	// 「キャンセル」時の処理終了
-
-}
-
 </script>
 
 
